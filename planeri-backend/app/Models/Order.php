@@ -9,6 +9,12 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'price',
+        'status'
+    ];
+
     protected $primaryKey = 'id';
 
     function user()

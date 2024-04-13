@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\PlanerController;
 use App\Http\Controllers\API\PlanerLayoutController;
 use App\Http\Controllers\API\PlanerTypeController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +27,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::get('/users', function (Request $request) {
+        return User::all();
+    });
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/orders', [OrderController::class, 'getOrders']);
+    Route::post('/orders', [OrderController::class, 'createOrder']);
 });
 
 Route::get('/planers', [PlanerController::class, 'getPlaners']);
