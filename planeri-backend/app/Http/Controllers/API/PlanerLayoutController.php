@@ -17,13 +17,7 @@ class PlanerLayoutController extends Controller
         return $planerLayouts;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -47,23 +41,27 @@ class PlanerLayoutController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $planerLayout = PlanerLayout::find($id);
+        return $planerLayout;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $json = request()->json()->all();
+
+        PlanerLayout::where('id', '=', $id)->update([
+            'name' => $json['name'],
+            'image' => $json['image'],
+            'price' => $json['price'],
+            'planer_type_id' => $json['planer_type_id']
+        ]);
+
+        return response()->json(["planerLayoutMessage" => "PlanerLayout is updated."]);
     }
 
     /**
@@ -71,6 +69,8 @@ class PlanerLayoutController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        PlanerLayout::where('id', '=', $id)->delete();
+
+        return response()->json(["planerLayoutMessage" => "PlanerLayout is deleted."]);
     }
 }

@@ -17,13 +17,6 @@ class PlanerTypeController extends Controller
         return $planerTypes;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -46,23 +39,25 @@ class PlanerTypeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $planerType = PlanerType::find($id);
+        return $planerType;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $json = $request->json()->all();
+
+        PlanerType::where('id', '=', $id)->update([
+            'name' => $json['name'],
+            'image' => $json['image'],
+            'price' => $json['price']
+        ]);
+
+        return response()->json(["planerTypeMessage" => "PlanerType is updated."]);
     }
 
     /**
@@ -70,6 +65,7 @@ class PlanerTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        PlanerType::where('id', '=', $id)->delete();
+        return response()->json(["planerTypeMessage" => "PlanerType is deleted."]);
     }
 }
