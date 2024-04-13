@@ -36,5 +36,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::get('/planers', [PlanerController::class, 'getPlaners']);
+Route::post('/planers', [PlanerController::class, 'createPlaner']);
 Route::resource('planerTypes', PlanerTypeController::class);
 Route::resource('planerLayouts', PlanerLayoutController::class);

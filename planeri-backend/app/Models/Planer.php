@@ -13,4 +13,20 @@ class Planer extends Model
     {
         return $this->belongsTo(PlanerType::class, 'planer_type_id');
     }
+
+    protected $fillable = [
+        "planer_type_id",
+        "cover",
+        "page_number",
+        "has_calendar",
+        "page_layout",
+        "price",
+        "size",
+        "cover_design",
+        "front_page",
+        "dates",
+        "daily_planer_design",
+        "notes",
+        "package_layout"
+    ];
 }
