@@ -80,4 +80,10 @@ class PlanerTypeController extends Controller
             return response()->json(['error' => 'Failed to delete planer type. Error: ' . $e->getMessage()], 500);
         }
     }
+
+    public function getPlanerTypesBySearch(string $searchExp)
+    {
+        $planerTypes = PlanerType::where('name', 'like', '%' . $searchExp . '%')->get();
+        return $planerTypes;
+    }
 }

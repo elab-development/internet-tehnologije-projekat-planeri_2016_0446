@@ -85,4 +85,10 @@ class PlanerLayoutController extends Controller
             return response()->json(['error' => 'Failed to delete planer layout. Error: ' . $e->getMessage()], 500);
         }
     }
+
+    public function getPlanerLayoutsBySearch(string $searchExp)
+    {
+        $planerLayouts = PlanerLayout::where('name', 'like', '%' . $searchExp . '%')->get();
+        return $planerLayouts;
+    }
 }

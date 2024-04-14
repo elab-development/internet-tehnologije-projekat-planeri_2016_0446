@@ -25,11 +25,14 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::resource('users', UserController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/orders', [OrderController::class, 'getOrders']);
     Route::post('/orders', [OrderController::class, 'createOrder']);
 });
+Route::get('/planerTypes/search={searchExp}', [PlanerTypeController::class, 'getPlanerTypesBySearch']);
+Route::get('/planerLayouts/search={searchExp}', [PlanerLayoutController::class, 'getPlanerLayoutsBySearch']);
+Route::get('/users/search={searchExp}', [UserController::class, 'getUsersBySearch']);
+Route::resource('users', UserController::class);
 
 Route::get('/planers', [PlanerController::class, 'getPlaners']);
 Route::resource('planerTypes', PlanerTypeController::class);

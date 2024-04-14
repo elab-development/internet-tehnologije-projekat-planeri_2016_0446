@@ -17,4 +17,12 @@ class UserController extends Controller
     {
         return User::find($id);
     }
+
+    public function getUsersBySearch(string $searchExp)
+    {
+        $users = User::where('name', 'like', '%' . $searchExp . '%')
+            ->orWhere('email', 'like', '%' . $searchExp . '%')
+            ->get();
+        return $users;
+    }
 }
