@@ -26,14 +26,18 @@ class PlanerLayoutController extends Controller
     {
         $json = $request->json()->all();
 
-        $planerLayout = PlanerLayout::create([
-            'name' => $json['name'],
-            'image' => $json['image'],
-            'price' => $json['price'],
-            'planer_type_id' => $json['planer_type_id']
-        ]);
+        try {
+            $planerLayout = PlanerLayout::create([
+                'name' => $json['name'],
+                'image' => $json['image'],
+                'price' => $json['price'],
+                'planer_type_id' => $json['planer_type_id']
+            ]);
 
-        return response()->json(['message' => 'Planer layout ' . $planerLayout->name . ' is successfully created!']);
+            return response()->json(['message' => 'Planer layout ' . $planerLayout->name . ' is successfully created!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to create planer layout. Error: ' . $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -52,16 +56,20 @@ class PlanerLayoutController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $json = request()->json()->all();
+        $json = $request->json()->all();
 
-        PlanerLayout::where('id', '=', $id)->update([
-            'name' => $json['name'],
-            'image' => $json['image'],
-            'price' => $json['price'],
-            'planer_type_id' => $json['planer_type_id']
-        ]);
+        try {
+            PlanerLayout::where('id', '=', $id)->update([
+                'name' => $json['name'],
+                'image' => $json['image'],
+                'price' => $json['price'],
+                'planer_type_id' => $json['planer_type_id']
+            ]);
 
-        return response()->json(["planerLayoutMessage" => "PlanerLayout is updated."]);
+            return response()->json(["planerLayoutMessage" => "PlanerLayout is updated."]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to update planer layout. Error: ' . $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -69,8 +77,12 @@ class PlanerLayoutController extends Controller
      */
     public function destroy(string $id)
     {
-        PlanerLayout::where('id', '=', $id)->delete();
+        try {
+            PlanerLayout::where('id', '=', $id)->delete();
 
-        return response()->json(["planerLayoutMessage" => "PlanerLayout is deleted."]);
+            return response()->json(["planerLayoutMessage" => "Planer layout is deleted."]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete planer layout. Error: ' . $e->getMessage()], 500);
+        }
     }
 }

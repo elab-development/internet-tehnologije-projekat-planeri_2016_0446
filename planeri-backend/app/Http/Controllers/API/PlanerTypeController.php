@@ -25,13 +25,16 @@ class PlanerTypeController extends Controller
     {
         $json = $request->json()->all();
 
-        $planerType = PlanerType::create([
-            'name' => $json['name'],
-            'image' => $json['image'],
-            'price' => $json['price']
-        ]);
-
-        return response()->json(['message' => 'Planer design ' . $planerType->name . ' with price ' . $planerType->price . ' is successfully created!']);
+        try {
+            $planerType = PlanerType::create([
+                'name' => $json['name'],
+                'image' => $json['image'],
+                'price' => $json['price']
+            ]);
+            return response()->json(['message' => 'Planer type ' . $planerType->name . ' with price ' . $planerType->price . ' is successfully created!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to create planer type. Error: ' . $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -51,13 +54,18 @@ class PlanerTypeController extends Controller
     {
         $json = $request->json()->all();
 
-        PlanerType::where('id', '=', $id)->update([
-            'name' => $json['name'],
-            'image' => $json['image'],
-            'price' => $json['price']
-        ]);
 
-        return response()->json(["planerTypeMessage" => "PlanerType is updated."]);
+        try {
+            PlanerType::where('id', '=', $id)->update([
+                'name' => $json['name'],
+                'image' => $json['image'],
+                'price' => $json['price']
+            ]);
+
+            return response()->json(["planerTypeMessage" => "PlanerType is updated."]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to update planer type. Error: ' . $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -65,7 +73,11 @@ class PlanerTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        PlanerType::where('id', '=', $id)->delete();
-        return response()->json(["planerTypeMessage" => "PlanerType is deleted."]);
+        try {
+            PlanerType::where('id', '=', $id)->delete();
+            return response()->json(["planerTypeMessage" => "PlanerType is deleted."]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete planer type. Error: ' . $e->getMessage()], 500);
+        }
     }
 }
