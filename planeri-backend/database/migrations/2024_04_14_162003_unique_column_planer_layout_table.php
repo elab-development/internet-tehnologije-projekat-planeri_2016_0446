@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('planer_layouts', function(Blueprint $table){
+            $table -> string('name')->require()->unique()->change();
+            $table -> string('image')->require()->unique()->change();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('planer_layouts', function(Blueprint $table){
+            $table -> string('name')->require()->change();
+            $table -> string('image')->require()->change();
+        });
+    }
+};

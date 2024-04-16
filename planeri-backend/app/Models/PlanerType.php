@@ -12,7 +12,6 @@ class PlanerType extends Model
 
     protected $fillable = [
         'name',
-        'image',
         'price',
     ];
 }
