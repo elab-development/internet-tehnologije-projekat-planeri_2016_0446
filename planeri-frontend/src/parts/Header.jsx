@@ -1,10 +1,15 @@
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col w-full h-[70px] lg:h-[140px] gap-y-5">
       <div className="flex flex-row w-full full justify-center items-center pt-5">
-        <div className="flex flex-col w-[45%] h-full text-center justify-center items-center">
+        <div
+          onClick={() => navigate("/")}
+          className="flex flex-col w-[45%] h-full text-center justify-center items-center cursor-pointer"
+        >
           <p className="text-2xl">Personalni Planeri</p>
           <p>for you, by you.</p>
         </div>
