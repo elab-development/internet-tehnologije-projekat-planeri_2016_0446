@@ -32,7 +32,9 @@ export default function Header() {
           Personalizuj
         </p>
         <p>O planerima</p>
-        <p>Upravljanje podacima</p>
+        <p className="cursor-pointer" onClick={() => navigate("/manage")}>
+          Upravljanje podacima
+        </p>
         <p>Kontakt</p>
       </div>
     </div>
