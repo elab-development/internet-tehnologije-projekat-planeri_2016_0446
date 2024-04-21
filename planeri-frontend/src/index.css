@@ -24,3 +24,55 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@keyframes fillNext {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fillPrev {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes borderFillFocus {
+  0% {
+    border-color: #92edb3;
+  }
+  100% {
+    border-color: #22c55e; /* Blue color example */
+  }
+}
+
+@keyframes borderFillUnfocus {
+  0% {
+    border-color: #22c55e;
+  }
+  100% {
+    border-color: #92edb3; /* Blue color example */
+  }
+}
+
+.fill-next-animation {
+  animation: fillNext 50ms forwards; /* Adjust duration as needed */
+}
+
+.fill-prev-animation {
+  animation: fillPrev 50ms forwards; /* Adjust duration as needed */
+}
+
+.fill-border-focus-animation {
+  animation: borderFillFocus 1s forwards; /* Adjust duration as needed */
+}
+
+.fill-border-unfocus-animation {
+  animation: borderFillUnfocus 1s forwards; /* Adjust duration as needed */
+}

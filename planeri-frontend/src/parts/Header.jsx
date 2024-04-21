@@ -28,7 +28,9 @@ export default function Header() {
       </div>
       <div className="flex flex-row w-full h-8 bg-green-900 justify-center items-center gap-x-40 text-white">
         <p>Planeri</p>
-        <p>Personalizuj</p>
+        <p className="cursor-pointer" onClick={() => navigate("/personalize")}>
+          Personalizuj
+        </p>
         <p>O planerima</p>
         <p>Upravljanje podacima</p>
         <p>Kontakt</p>
