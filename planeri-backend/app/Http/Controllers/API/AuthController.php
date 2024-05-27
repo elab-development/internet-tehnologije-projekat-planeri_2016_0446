@@ -15,7 +15,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255|email|unique:users',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:8'
         ]);
 
         if ($validator->fails())
@@ -24,7 +24,8 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
+            'role_id' => $request->role_id
         ]);
 
         $token = $user->createToken("auth_token")->plainTextToken;
@@ -39,9 +40,12 @@ class AuthController extends Controller
 
         $user = User::where('email', $request['email'])->first();
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $fullAccessToken = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['message' => 'Hi ' . $user->name . 'welcome to home.', 'access_token' => $token]);
+        $token = explode('|', $fullAccessToken);
+
+
+        return response()->json(['message' => 'Cao ' . $user->name . ', dobrosli na sajt Personalizovani planeri.', 'access_token' => $token[1], 'user' => $user]);
     }
 
     public function logout()

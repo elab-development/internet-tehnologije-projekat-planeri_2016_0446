@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ setShowLoginPopup, user, setUser }) {
   const navigate = useNavigate();
+  const [showPopupUser, setShowPopupUser] = useState(false);
+
   return (
     <div className="flex flex-col w-full h-[70px] lg:h-[140px] gap-y-5">
       <div className="flex flex-row w-full full justify-center items-center pt-5">
@@ -21,7 +24,36 @@ export default function Header() {
             <input type="text" className="w-[85%] outline-none" />
           </div>
           <div className="flex flex-row w-[20%] h-full justify-end items-center gap-x-6">
-            <FaUser className="size-6 cursor-pointer" />
+            <div className="flex flex-col">
+              <FaUser
+                onClick={() => !user && setShowLoginPopup(true)}
+                onMouseEnter={() => setShowPopupUser(true)}
+                onMouseLeave={() => setShowPopupUser(false)}
+                className="relative size-6 cursor-pointer"
+              />
+              {showPopupUser && user && (
+                <div
+                  onMouseEnter={() => setShowPopupUser(true)}
+                  onMouseLeave={() => setShowPopupUser(false)}
+                  className="absolute flex flex-col h-fit w-fit bg-slate-500 translate-y-7 p-2 rounded-lg -translate-x-[40px] lg:-translate-x-[80px]"
+                >
+                  <p>Name</p>
+                  <p>Edit Account</p>
+                  <p>My orders</p>
+                  <p
+                    className="cursor-pointer"
+                    onClick={() => {
+                      localStorage.removeItem("userInfo");
+                      setUser(null);
+                      alert("Uspesno ste se izlogovali!");
+                    }}
+                  >
+                    Logout
+                  </p>
+                </div>
+              )}
+            </div>
+
             <FaShoppingCart className="size-6 cursor-pointer" />
           </div>
         </div>

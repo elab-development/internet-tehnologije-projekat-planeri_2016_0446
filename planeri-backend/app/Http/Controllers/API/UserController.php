@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,5 +25,10 @@ class UserController extends Controller
             ->orWhere('email', 'like', '%' . $searchExp . '%')
             ->get();
         return $users;
+    }
+
+    public function getRole(string $roleId)
+    {
+        return Role::find($roleId);
     }
 }
