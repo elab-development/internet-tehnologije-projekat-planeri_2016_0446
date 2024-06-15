@@ -6,6 +6,9 @@ import Personalize from "./parts/Personalize";
 import ManageData from "./parts/ManageData";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Planers from "./parts/Planers";
+import Contact from "./parts/Contact";
+import AboutPlaners from "./parts/AboutPlaners";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,8 +52,11 @@ function App() {
         />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/planers" element={<Planers />} />
           <Route path="/personalize" element={<Personalize />} />
+          <Route path="/aboutPlanners" element={<AboutPlaners />} />
           <Route path="/manage" element={<ManageData />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         {showLoginPopup && (
           <>

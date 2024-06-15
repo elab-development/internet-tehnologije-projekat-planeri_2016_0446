@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Header({ setShowLoginPopup, user, setUser }) {
   const navigate = useNavigate();
+  const [showCart, setShowCart] = useState(false);
   const [showPopupUser, setShowPopupUser] = useState(false);
 
   return (
@@ -53,21 +54,64 @@ export default function Header({ setShowLoginPopup, user, setUser }) {
                 </div>
               )}
             </div>
-
-            <FaShoppingCart className="size-6 cursor-pointer" />
+            <div
+              className="flex flex-col"
+              onClick={() => setShowCart(!showCart)}
+            >
+              <FaShoppingCart className="relative size-6 cursor-pointer" />
+              {showCart && (
+                <div className="flex flex-col w-[300px] h-[450px] gap-y-3 justify-start items-center p-5 bg-red-300 -translate-x-[270px] translate-y-7 absolute">
+                  <h2>Cart</h2>
+                  <div className="h-[1px] bg-gray-800 w-full"></div>
+                  <div className="flex flex-row w-full h-fit gap-x-5 items-center border border-gray-800 p-1">
+                    <div className="flex w-10 h-10 border border-gray-800"></div>
+                    <div className="flex flex-col">
+                      <p>Studentski</p>
+                      <p>Price: 500 djunti</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-row w-full h-fit gap-x-5 items-center border border-gray-800 p-1">
+                    <div className="flex w-10 h-10 border border-gray-800"></div>
+                    <div className="flex flex-col">
+                      <p>Studentski</p>
+                      <p>Price: 500 djunti</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-row w-full h-fit gap-x-5 items-center border border-gray-800 p-1">
+                    <div className="flex w-10 h-10 border border-gray-800"></div>
+                    <div className="flex flex-col">
+                      <p>Studentski</p>
+                      <p>Price: 500 djunti</p>
+                    </div>
+                  </div>
+                  <div className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-blue-300">
+                    Buy
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
       <div className="flex flex-row w-full h-8 bg-green-900 justify-center items-center gap-x-40 text-white">
-        <p>Planeri</p>
+        <p className="cursor-pointer" onClick={() => navigate("/planers")}>
+          Planeri
+        </p>
         <p className="cursor-pointer" onClick={() => navigate("/personalize")}>
           Personalizuj
         </p>
-        <p>O planerima</p>
+        <p
+          className="cursor-pointer"
+          onClick={() => navigate("/aboutPlanners")}
+        >
+          O planerima
+        </p>
         <p className="cursor-pointer" onClick={() => navigate("/manage")}>
           Upravljanje podacima
         </p>
-        <p>Kontakt</p>
+        <p className="cursor-pointer" onClick={() => navigate("/contact")}>
+          Kontakt
+        </p>
       </div>
     </div>
   );
