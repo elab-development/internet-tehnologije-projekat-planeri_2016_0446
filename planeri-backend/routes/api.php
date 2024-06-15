@@ -5,6 +5,7 @@ use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\PlanerController;
 use App\Http\Controllers\API\PlanerLayoutController;
 use App\Http\Controllers\API\PlanerTypeController;
+use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,5 +37,7 @@ Route::get('/users/search={searchExp}', [UserController::class, 'getUsersBySearc
 Route::resource('users', UserController::class);
 
 Route::get('/planers', [PlanerController::class, 'getPlaners']);
+Route::post('/planers', [PlanerController::class, 'createPlaner']);
 Route::resource('planerTypes', PlanerTypeController::class);
 Route::resource('planerLayouts', PlanerLayoutController::class);
+Route::get('/products', [ProductController::class, 'getProducts']);

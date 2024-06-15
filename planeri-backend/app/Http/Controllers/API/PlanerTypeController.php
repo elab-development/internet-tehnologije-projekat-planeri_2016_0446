@@ -58,7 +58,6 @@ class PlanerTypeController extends Controller
         try {
             PlanerType::where('id', '=', $id)->update([
                 'name' => $json['name'],
-                'image' => $json['image'],
                 'price' => $json['price']
             ]);
 
