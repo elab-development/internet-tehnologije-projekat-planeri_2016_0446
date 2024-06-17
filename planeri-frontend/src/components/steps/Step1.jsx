@@ -1,10 +1,13 @@
 export default function Step1({
   step,
   nextStep,
+  planerTypes,
   selectedPlanerType,
   handlePlanerTypeChange,
   selectedPlanerSize,
   handlePlanerSizeChange,
+  selectedPageNumber,
+  handlePageNumberChange,
 }) {
   return (
     <div className="flex flex-col w-full h-full justify-center items-center p-10 gap-y-5">
@@ -12,36 +15,18 @@ export default function Step1({
         <div className="flex flex-col w-full h-full gap-y-5">
           <div className="flex flex-col w-full h-full justify-start items-start">
             <p className="text-2xl font-semibold">Izaberi vrstu planera</p>
-            <div className="flex text-xl gap-x-5">
-              <input
-                type="radio"
-                name="planerType"
-                value="Dnevni"
-                onChange={(e) => handlePlanerTypeChange(e)}
-                checked={selectedPlanerType === "Dnevni"}
-              />
-              <p>Dnevni planer (1500 din)</p>
-            </div>
-            <div className="flex text-xl gap-x-5">
-              <input
-                type="radio"
-                name="planerType"
-                value="Studentski"
-                onChange={(e) => handlePlanerTypeChange(e)}
-                checked={selectedPlanerType === "Studentski"}
-              />
-              <p>Studentski planer (1200 din)</p>
-            </div>
-            <div className="flex text-xl gap-x-5">
-              <input
-                type="radio"
-                name="planerType"
-                value="Bullet"
-                onChange={(e) => handlePlanerTypeChange(e)}
-                checked={selectedPlanerType === "Bullet"}
-              />
-              <p>Bullet journal (1000 din)</p>
-            </div>
+            {planerTypes.map((pType) => (
+              <div key={pType.id} className="flex text-xl gap-x-5">
+                <input
+                  type="radio"
+                  name="planerType"
+                  value={pType.name}
+                  onChange={() => handlePlanerTypeChange(pType)}
+                  checked={selectedPlanerType?.name === pType.name}
+                />
+                <p>{`${pType.name} (${pType.price} din)`}</p>
+              </div>
+            ))}
           </div>
           <div className="flex flex-col w-full h-full justify-start items-start">
             <p className="text-2xl font-semibold">Izaberi velicinu planera</p>
@@ -64,6 +49,29 @@ export default function Step1({
                 checked={selectedPlanerSize === "A6"}
               />
               <p>A6</p>
+            </div>
+          </div>
+          <div className="flex flex-col w-full h-full justify-start items-start">
+            <p className="text-2xl font-semibold">Izaberi broj strana</p>
+            <div className="flex text-xl gap-x-5">
+              <input
+                type="radio"
+                name="pageNumber"
+                value="100"
+                onChange={(e) => handlePageNumberChange(e)}
+                checked={selectedPageNumber === "100"}
+              />
+              <p>100</p>
+            </div>
+            <div className="flex text-xl gap-x-5">
+              <input
+                type="radio"
+                name="pageNumber"
+                value="250"
+                onChange={(e) => handlePageNumberChange(e)}
+                checked={selectedPageNumber === "250"}
+              />
+              <p>250</p>
             </div>
           </div>
         </div>

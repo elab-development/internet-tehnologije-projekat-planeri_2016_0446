@@ -14,7 +14,7 @@ export default function Step4({
     <div className="flex flex-col w-full h-full justify-center items-center p-10 gap-y-5">
       <div className="flex flex-row w-full h-full justify-center items-start">
         <div className="flex flex-col w-full h-full gap-y-5">
-          {selectedPlanerType === "Bullet" ? (
+          {selectedPlanerType.name === "Bullet" ? (
             <div className="flex flex-col w-full h-full justify-start items-start">
               <p className="text-2xl font-semibold">
                 Izaberite izgled stranica

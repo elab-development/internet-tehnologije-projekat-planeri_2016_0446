@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   coverDesigns,
   covers,
@@ -9,121 +9,35 @@ import {
   planerTypes,
   sizes,
 } from "../../data/stepsData";
+import { usePlanersService } from "../../service/usePlanersService";
 
 export default function ManagePlaners() {
   const [editPlaner, setEditPlaner] = useState(null);
-  const data = [
-    {
-      id: 1,
-      cover: "Tvrd",
-      coverDesign: "CoverDesign1",
-      size: "A5",
-      planerType: "Studentski",
-      planerTypeLayout: "PlanerTypeLayout",
-      dates: "Od marta 2014",
-      notes: "null",
-      pageNumber: 140,
-    },
-    {
-      id: 2,
-      cover: "Mek",
-      coverDesign: "CoverDesign2",
-      size: "A5",
-      planerType: "Studentski",
-      planerTypeLayout: "PlanerTypeLayout",
-      dates: "Od aprila 2014",
-      notes: "null",
-      pageNumber: 140,
-    },
-    {
-      id: 3,
-      cover: "Tvrd",
-      coverDesign: "CoverDesign1",
-      size: "A6",
-      planerType: "Bullet",
-      planerTypeLayout: "PlanerTypeLayout2",
-      dates: "Od marta 2014",
-      notes: "null",
-      pageNumber: 90,
-    },
-    {
-      id: 2,
-      cover: "Mek",
-      coverDesign: "CoverDesign2",
-      size: "A5",
-      planerType: "Studentski",
-      planerTypeLayout: "PlanerTypeLayout",
-      dates: "Od aprila 2014",
-      notes: "null",
-      pageNumber: 140,
-    },
-    {
-      id: 3,
-      cover: "Tvrd",
-      coverDesign: "CoverDesign1",
-      size: "A6",
-      planerType: "Bullet",
-      planerTypeLayout: "PlanerTypeLayout2",
-      dates: "Od marta 2014",
-      notes: "null",
-      pageNumber: 90,
-    },
-    {
-      id: 2,
-      cover: "Mek",
-      coverDesign: "CoverDesign2",
-      size: "A5",
-      planerType: "Studentski",
-      planerTypeLayout: "PlanerTypeLayout",
-      dates: "Od aprila 2014",
-      notes: "null",
-      pageNumber: 140,
-    },
-    {
-      id: 3,
-      cover: "Tvrd",
-      coverDesign: "CoverDesign1",
-      size: "A6",
-      planerType: "Bullet",
-      planerTypeLayout: "PlanerTypeLayout2",
-      dates: "Od marta 2014",
-      notes: "null",
-      pageNumber: 90,
-    },
-    {
-      id: 2,
-      cover: "Mek",
-      coverDesign: "CoverDesign2",
-      size: "A5",
-      planerType: "Studentski",
-      planerTypeLayout: "PlanerTypeLayout",
-      dates: "Od aprila 2014",
-      notes: "null",
-      pageNumber: 140,
-    },
-    {
-      id: 3,
-      cover: "Tvrd",
-      coverDesign: "CoverDesign1",
-      size: "A6",
-      planerType: "Bullet",
-      planerTypeLayout: "PlanerTypeLayout2",
-      dates: "Od marta 2014",
-      notes: "null",
-      pageNumber: 90,
-    },
-  ];
+  const [planers, setPlaners] = useState([]);
 
-  const createPlaner = () => {
-    alert(
-      `Planer successfully created: ${editPlaner.cover}, ${editPlaner.coverDesign}`
-    );
+  const { getPlanersRequest, createPlanerRequest } = usePlanersService();
+
+  const getPlanersData = async () => {
+    await getPlanersRequest().then((result) => setPlaners(result));
+  };
+
+  const createPlaner = async () => {
+    await createPlanerRequest(editPlaner)
+      .then(getPlanersData())
+      .finally(
+        alert(
+          `Planer successfully created: ${editPlaner.cover}, ${editPlaner.coverDesign}`
+        )
+      );
   };
 
   const selectPlaner = (planer) => {
-    console.log("fsafasfasfs", planer);
     setEditPlaner(planer);
   };
+
+  useEffect(() => {
+    getPlanersData();
+  }, []);
 
   return (
     <div className="flex flex-col w-full h-full p-3 gap-y-5">
@@ -140,20 +54,20 @@ export default function ManagePlaners() {
           <div className="flex w-[10%]">PageNumbers</div>
         </div>
         <div className="flex flex-col w-full h-[200px] overflow-y-scroll">
-          {data.map((planer) => (
+          {planers.map((planer) => (
             <div
               onClick={() => selectPlaner(planer)}
               className="flex flex-row w-full border pl-2 cursor-pointer"
             >
               <div className="flex w-[5%]">{planer.id}</div>
               <div className="flex w-[8%]">{planer.cover}</div>
-              <div className="flex w-[14%]">{planer.coverDesign}</div>
+              <div className="flex w-[14%]">{planer.cover_design}</div>
               <div className="flex w-[10%]">{planer.size}</div>
-              <div className="flex w-[10%]">{planer.planerType}</div>
-              <div className="flex w-[16%]">{planer.planerTypeLayout}</div>
+              <div className="flex w-[10%]">{planer.planer_type}</div>
+              <div className="flex w-[16%]">{planer.page_layout}</div>
               <div className="flex w-[14%]">{planer.dates}</div>
               <div className="flex w-[10%]">{planer.notes}</div>
-              <div className="flex w-[10%]">{planer.pageNumber}</div>
+              <div className="flex w-[10%]">{planer.page_number}</div>
             </div>
           ))}
         </div>

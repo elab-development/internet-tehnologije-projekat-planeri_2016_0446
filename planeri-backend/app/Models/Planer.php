@@ -15,18 +15,16 @@ class Planer extends Model
     }
 
     protected $fillable = [
-        "planer_type_id",
-        "cover",
-        "page_number",
-        "has_calendar",
-        "page_layout",
-        "price",
-        "size",
-        "cover_design",
-        "front_page",
-        "dates",
-        "daily_planer_design",
-        "notes",
-        "package_layout"
+        'planer_type_id',
+        'cover',
+        'cover_design',
+        'page_number',
+        'page_layout',
+        'price',
+        'size',
+        'front_page',
+        'dates',
+        'daily_planer_design',
+        'notes'
     ];
 }

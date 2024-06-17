@@ -3,6 +3,8 @@ import Step1 from "../components/steps/Step1";
 import Step2 from "../components/steps/Step2";
 import Step3 from "../components/steps/Step3";
 import Step4 from "../components/steps/Step4";
+import { usePlanerTypesService } from "../service/usePlanerTypesService";
+import { usePlanersService } from "../service/usePlanersService";
 
 export default function usePersonalizeData() {
   const [steps, setSteps] = useState([
@@ -14,16 +16,24 @@ export default function usePersonalizeData() {
 
   const [currentStep, setCurrentStep] = useState(steps[0]);
 
+  const { getPlanerTypesRequest } = usePlanerTypesService();
+  const { createPlanerRequest } = usePlanersService();
+
   // Step 1
+  const [planerTypes, setPlanerTypes] = useState([]);
   const [selectedPlanerType, setSelectedPlanerType] = useState(null);
   const [selectedPlanerSize, setSelectedPlanerSize] = useState(null);
 
-  const handlePlanerTypeChange = (event) => {
-    setSelectedPlanerType(event.target.value);
+  const handlePlanerTypeChange = (pType) => {
+    setSelectedPlanerType(pType);
   };
 
   const handlePlanerSizeChange = (event) => {
     setSelectedPlanerSize(event.target.value);
+  };
+
+  const getPlanerTypesData = async () => {
+    await getPlanerTypesRequest().then((result) => setPlanerTypes(result));
   };
 
   //Step 2
@@ -77,16 +87,22 @@ export default function usePersonalizeData() {
     setSelectedPageLayout(event.target.value);
   };
 
-  const finishCustomization = () => {
+  const finishCustomization = async () => {
     const planer = {
-      planerType: selectedPlanerType,
-      planerSize: selectedPlanerSize,
-      coverType: selectedCoverType,
-      coverDesign: selectedCoverDesign,
-      frontPage: selectedFrontPage,
-      date: selectedDate,
-      dailyPlanerType: selectedDailyPlanerType,
+      planer_type_id: selectedPlanerType?.id,
+      cover_type: selectedCoverType,
+      cover_design: selectedCoverDesign,
+      size: selectedPlanerSize,
+      front_page: selectedFrontPage,
+      dates: selectedDate,
+      daily_planer_design: selectedDailyPlanerType,
+      page_number: selectedPageNumber,
+      page_layout: selectedPlanerLayout,
+      notes: selectedNoteType,
+      price: 0,
     };
+    console.log("p", planer);
+    await createPlanerRequest(planer);
   };
 
   //////////////////////////////////////////
@@ -128,6 +144,10 @@ export default function usePersonalizeData() {
   };
 
   useEffect(() => {
+    getPlanerTypesData();
+  }, []);
+
+  useEffect(() => {
     switch (currentStep.id) {
       case 1:
         setCurrentStep((prev) => {
@@ -137,10 +157,13 @@ export default function usePersonalizeData() {
               <Step1
                 step={prev.id}
                 nextStep={nextStep}
+                planerTypes={planerTypes}
                 selectedPlanerType={selectedPlanerType}
                 handlePlanerTypeChange={handlePlanerTypeChange}
                 selectedPlanerSize={selectedPlanerSize}
                 handlePlanerSizeChange={handlePlanerSizeChange}
+                selectedPageNumber={selectedPageNumber}
+                handlePageNumberChange={handlePageNumberChange}
               />
             ),
           };

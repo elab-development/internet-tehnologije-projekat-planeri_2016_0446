@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ManagePlaners from "../components/manageData/ManagePlaners";
+import ManagePlanerTypes from "../components/manageData/ManagePlanerTypes";
 
 export default function ManageData() {
   const [tabs, setTabs] = useState([
@@ -9,7 +10,12 @@ export default function ManageData() {
       content: <ManagePlaners></ManagePlaners>,
       isSelected: false,
     },
-    { id: 2, displayText: "Planer Types", content: <></>, isSelected: false },
+    {
+      id: 2,
+      displayText: "Planer Types",
+      content: <ManagePlanerTypes></ManagePlanerTypes>,
+      isSelected: false,
+    },
     { id: 3, displayText: "Planer Layouts", content: <></>, isSelected: false },
     { id: 4, displayText: "Orders", content: <></>, isSelected: false },
     { id: 5, displayText: "Users", content: <></>, isSelected: false },

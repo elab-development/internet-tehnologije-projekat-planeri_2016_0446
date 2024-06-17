@@ -20,7 +20,7 @@ export default function Step3({
     <div className="flex flex-col w-full h-full justify-center items-center p-10 gap-y-5">
       <div className="flex flex-row w-full h-full justify-center items-start">
         <div className="flex flex-col w-full h-full gap-y-5">
-          {selectedPlanerType === "Studentski" && (
+          {selectedPlanerType?.name === "Studentski" && (
             <div className="flex flex-col w-full h-full justify-start items-start">
               <p className="text-2xl font-semibold">Izaberite raspored</p>
               <div className="flex text-xl gap-x-5">
@@ -55,7 +55,7 @@ export default function Step3({
               </div>
             </div>
           )}
-          {selectedPlanerType === "Bullet" && (
+          {selectedPlanerType?.name === "Bullet" && (
             <div className="flex flex-col w-full h-full justify-start items-start">
               <p className="text-2xl font-semibold">Izaberite broj stranica</p>
               <div className="flex text-xl gap-x-5">
@@ -111,6 +111,9 @@ export default function Step3({
                   onChange={(e) => handleDateChange(e)}
                   value={selectedDate}
                 >
+                  <option value="" disabled selected hidden>
+                    Odaberite datum
+                  </option>
                   {dates.map((date) => (
                     <option>{date}</option>
                   ))}
@@ -118,7 +121,7 @@ export default function Step3({
               </div>
             </div>
           )}
-          {selectedPlanerType === "Dnevni" && (
+          {selectedPlanerType?.name === "Dnevni" && (
             <div className="flex flex-col w-full h-full justify-start items-start">
               <p className="text-2xl font-semibold">Vrsta dnevnog rasporeda</p>
               <div className="flex text-xl gap-x-5">

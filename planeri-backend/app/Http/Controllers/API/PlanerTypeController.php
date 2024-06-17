@@ -28,7 +28,6 @@ class PlanerTypeController extends Controller
         try {
             $planerType = PlanerType::create([
                 'name' => $json['name'],
-                'image' => $json['image'],
                 'price' => $json['price']
             ]);
             return response()->json(['message' => 'Planer type ' . $planerType->name . ' with price ' . $planerType->price . ' is successfully created!']);
