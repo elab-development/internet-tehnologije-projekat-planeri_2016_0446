@@ -16,5 +16,12 @@ class VerifyCsrfToken extends Middleware
         'api/planers',
         'api/planerTypes',
         'api/planerTypes/*',
+        'api/planerLayouts',
+        'api/planerLayouts/*',
+        'api/users',
+        'api/users/*',
+        'api/register',
+        'api/login',
+        'api/orders'
     ];
 }

@@ -35,6 +35,7 @@ Route::get('/planerTypes/search={searchExp}', [PlanerTypeController::class, 'get
 Route::get('/planerLayouts/search={searchExp}', [PlanerLayoutController::class, 'getPlanerLayoutsBySearch']);
 Route::get('/users/search={searchExp}', [UserController::class, 'getUsersBySearch']);
 Route::resource('users', UserController::class);
+Route::get('/users/roles', [UserController::class, 'getRoles']);
 
 Route::get('/planers', [PlanerController::class, 'getPlaners']);
 Route::post('/planers', [PlanerController::class, 'createPlaner']);

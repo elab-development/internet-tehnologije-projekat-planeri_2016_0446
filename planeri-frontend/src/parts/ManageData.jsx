@@ -1,6 +1,9 @@
 import { useState } from "react";
 import ManagePlaners from "../components/manageData/ManagePlaners";
 import ManagePlanerTypes from "../components/manageData/ManagePlanerTypes";
+import ManagePlanerLayouts from "../components/manageData/ManagePlanerLayouts";
+import ManageUsers from "../components/manageData/ManageUsers";
+import ManageOrders from "../components/manageData/ManageOrders";
 
 export default function ManageData() {
   const [tabs, setTabs] = useState([
@@ -16,9 +19,24 @@ export default function ManageData() {
       content: <ManagePlanerTypes></ManagePlanerTypes>,
       isSelected: false,
     },
-    { id: 3, displayText: "Planer Layouts", content: <></>, isSelected: false },
-    { id: 4, displayText: "Orders", content: <></>, isSelected: false },
-    { id: 5, displayText: "Users", content: <></>, isSelected: false },
+    {
+      id: 3,
+      displayText: "Planer Layouts",
+      content: <ManagePlanerLayouts></ManagePlanerLayouts>,
+      isSelected: false,
+    },
+    {
+      id: 4,
+      displayText: "Orders",
+      content: <ManageOrders></ManageOrders>,
+      isSelected: false,
+    },
+    {
+      id: 5,
+      displayText: "Users",
+      content: <ManageUsers></ManageUsers>,
+      isSelected: false,
+    },
   ]);
   const updateTabs = (tabId) => {
     setTabs((prevTabs) => {
