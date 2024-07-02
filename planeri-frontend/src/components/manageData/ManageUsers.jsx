@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { usePlanerTypesService } from "../../service/usePlanerTypesService";
 import { useUsersService } from "../../service/useUsersService";
 import { useAuthService } from "../../service/useAuthService";
 
@@ -22,7 +21,7 @@ export default function ManageUsers() {
   };
 
   const getRolesData = async () => {
-    await getRolesRequest().then((result) => console.log(result));
+    await getRolesRequest().then((result) => setRoles(result));
   };
 
   const createUser = async () => {

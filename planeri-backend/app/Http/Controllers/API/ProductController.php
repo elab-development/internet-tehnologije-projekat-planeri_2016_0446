@@ -12,4 +12,10 @@ class ProductController extends Controller
         $products = Product::all();
         return $products;
     }
+
+    public function getProductsBySearch(string $searchExp)
+    {
+        $products = Product::where('name', 'like', '%' . $searchExp . '%')->get();
+        return $products;
+    }
 }

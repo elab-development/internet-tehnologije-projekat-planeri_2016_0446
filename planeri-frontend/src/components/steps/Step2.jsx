@@ -45,8 +45,8 @@ export default function Step2({
                     type="radio"
                     name="coverType"
                     value={cover.name}
-                    onChange={(e) => handleCoverTypeChange(e)}
-                    checked={selectedCoverType === cover.name}
+                    onChange={() => handleCoverTypeChange(cover)}
+                    checked={selectedCoverType?.name === cover.name}
                   />
                   <p>
                     {cover.name} povez ({cover.price} din)

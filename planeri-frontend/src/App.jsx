@@ -15,6 +15,7 @@ function App() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [products, setProducts] = useState([]);
 
   const handleLogin = async () => {
     try {
@@ -49,10 +50,14 @@ function App() {
           setShowLoginPopup={setShowLoginPopup}
           user={user}
           setUser={setUser}
+          setProductsByExp={setProducts}
         />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/planers" element={<Planers />} />
+          <Route
+            path="/planers"
+            element={<Planers products={products} setProducts={setProducts} />}
+          />
           <Route path="/personalize" element={<Personalize />} />
           <Route path="/aboutPlanners" element={<AboutPlaners />} />
           <Route path="/manage" element={<ManageData />} />

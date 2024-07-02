@@ -42,3 +42,4 @@ Route::post('/planers', [PlanerController::class, 'createPlaner']);
 Route::resource('planerTypes', PlanerTypeController::class);
 Route::resource('planerLayouts', PlanerLayoutController::class);
 Route::get('/products', [ProductController::class, 'getProducts']);
+Route::get('/products/search={searchExp}', [ProductController::class, 'getProductsBySearch']);

@@ -1,11 +1,59 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useProductsService } from "../service/useProductsService";
 
-export default function Header({ setShowLoginPopup, user, setUser }) {
+export default function Header({
+  setShowLoginPopup,
+  user,
+  setUser,
+  setProductsByExp,
+}) {
   const navigate = useNavigate();
   const [showCart, setShowCart] = useState(false);
   const [showPopupUser, setShowPopupUser] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const [searchExp, setSearchExp] = useState("");
+  const [price, setPrice] = useState(0);
+
+  const { getProductsBySearchRequest } = useProductsService();
+
+  const getCartItems = () => {
+    var cItems = JSON.parse(localStorage.getItem("cart") || "[]");
+    console.log("c", cItems);
+    const totalPrice = cItems.reduce(
+      (sum, item) => sum + parseInt(item.price),
+      0
+    );
+
+    setCartItems(cItems);
+    setPrice(totalPrice);
+  };
+
+  const handleSearch = (event) => {
+    setSearchExp(event.target.value);
+  };
+
+  const submitSearch = async (searchExp) => {
+    navigate("planers");
+
+    let products = await getProductsBySearchRequest(searchExp);
+    setProductsByExp(products);
+  };
+
+  useEffect(() => {
+    getCartItems();
+  }, [showCart, cartItems]);
+
+  const removeCartItem = (id) => {
+    var cItems = JSON.parse(localStorage.getItem("cart") || "[]");
+    const updatedItems = cItems.filter((item) => item.id !== id);
+    setCartItems(updatedItems);
+
+    const totalPrice = updatedItems.reduce((sum, item) => sum + item.price, 0);
+    localStorage.setItem("cart", JSON.stringify(updatedItems));
+    setPrice(totalPrice);
+  };
 
   return (
     <div className="flex flex-col w-full h-[70px] lg:h-[140px] gap-y-5">
@@ -19,30 +67,39 @@ export default function Header({ setShowLoginPopup, user, setUser }) {
         </div>
         <div className="flex flex-row w-full  h-full justify-around items-center">
           <div className="flex flex-row w-[40%] h-10 rounded-full border border-gray-900">
-            <div className="flex w-[10%] h-full justify-center items-center">
+            <div
+              className="flex w-[10%] h-full justify-center items-center cursor-pointer"
+              onClick={() => submitSearch(searchExp.toString())}
+            >
               <FaSearch />
             </div>
-            <input type="text" className="w-[85%] outline-none" />
+            <input
+              type="text"
+              value={searchExp}
+              onChange={(e) => handleSearch(e)}
+              className="w-[85%] outline-none"
+            />
           </div>
-          <div className="flex flex-row w-[20%] h-full justify-end items-center gap-x-6">
+          <div
+            className="flex flex-row w-[20%] h-full justify-end items-center gap-x-6"
+            onMouseLeave={() => setShowPopupUser(false)}
+          >
             <div className="flex flex-col">
               <FaUser
                 onClick={() => !user && setShowLoginPopup(true)}
                 onMouseEnter={() => setShowPopupUser(true)}
-                onMouseLeave={() => setShowPopupUser(false)}
                 className="relative size-6 cursor-pointer"
               />
               {showPopupUser && user && (
                 <div
                   onMouseEnter={() => setShowPopupUser(true)}
-                  onMouseLeave={() => setShowPopupUser(false)}
-                  className="absolute flex flex-col h-fit w-fit bg-slate-500 translate-y-7 p-2 rounded-lg -translate-x-[40px] lg:-translate-x-[80px]"
+                  className="absolute flex flex-col h-fit w-40 bg-slate-500 translate-y-7 p-2 rounded-lg -translate-x-[40px] lg:-translate-x-[130px]"
                 >
-                  <p>Name</p>
-                  <p>Edit Account</p>
+                  <p>{user.name}</p>
+                  <div className="h-[1px] bg-black"> </div>
                   <p>My orders</p>
                   <p
-                    className="cursor-pointer"
+                    className="cursor-pointer hover:bg-red-600 rounded-lg"
                     onClick={() => {
                       localStorage.removeItem("userInfo");
                       setUser(null);
@@ -58,34 +115,49 @@ export default function Header({ setShowLoginPopup, user, setUser }) {
               className="flex flex-col"
               onClick={() => setShowCart(!showCart)}
             >
-              <FaShoppingCart className="relative size-6 cursor-pointer" />
+              <div className="relative">
+                <div className="absolute right-0 top-0 rounded-full size-4 z-50 translate-x-2 -translate-y-1 flex justify-center items-center bg-white border-[1px] border-gray-700 text-red-600 font-bold text-xs">
+                  {cartItems.length}
+                </div>
+                <FaShoppingCart className="relative size-6 cursor-pointer" />
+              </div>
               {showCart && (
-                <div className="flex flex-col w-[300px] h-[450px] gap-y-3 justify-start items-center p-5 bg-red-300 -translate-x-[270px] translate-y-7 absolute">
-                  <h2>Cart</h2>
-                  <div className="h-[1px] bg-gray-800 w-full"></div>
-                  <div className="flex flex-row w-full h-fit gap-x-5 items-center border border-gray-800 p-1">
-                    <div className="flex w-10 h-10 border border-gray-800"></div>
-                    <div className="flex flex-col">
-                      <p>Studentski</p>
-                      <p>Price: 500 djunti</p>
-                    </div>
+                <div className="flex flex-col w-[300px] h-[450px] gap-y-3 justify-between items-center p-5 bg-red-300 -translate-x-[270px] translate-y-7 absolute">
+                  <div className="flex flex-col w-full gap-y-4">
+                    <p className="text-xl font-semibold">Cart</p>
+                    <div className="h-[1px] bg-gray-800 w-full"></div>
                   </div>
-                  <div className="flex flex-row w-full h-fit gap-x-5 items-center border border-gray-800 p-1">
-                    <div className="flex w-10 h-10 border border-gray-800"></div>
-                    <div className="flex flex-col">
-                      <p>Studentski</p>
-                      <p>Price: 500 djunti</p>
-                    </div>
+
+                  <div className="flex flex-col w-full h-full gap-y-2 overflow-y-auto">
+                    {cartItems.map((cItem) => (
+                      <div className="flex flex-row w-full h-fit gap-x-5 items-center border border-gray-800 p-1">
+                        <div className="flex w-10 h-10 border border-gray-800"></div>
+                        <div className="flex flex-col">
+                          <p>
+                            {cItem.planerType
+                              ? cItem.planerType.name
+                              : cItem.name}
+                          </p>
+                          <p>Price: {cItem.price} djunti</p>
+                        </div>
+                        <div
+                          onClick={() => removeCartItem(cItem.id)}
+                          className="flex flex-col w-10 h-10 items-center justify-center text-lg bg-red-500 cursor-pointer"
+                        >
+                          X
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="flex flex-row w-full h-fit gap-x-5 items-center border border-gray-800 p-1">
-                    <div className="flex w-10 h-10 border border-gray-800"></div>
-                    <div className="flex flex-col">
-                      <p>Studentski</p>
-                      <p>Price: 500 djunti</p>
+
+                  <div className="flex flex-col w-full gap-y-3">
+                    <div className="flex flex-row w-full justify-between">
+                      <p>Price: </p>
+                      <p>{price} din</p>
                     </div>
-                  </div>
-                  <div className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-blue-300">
-                    Buy
+                    <div className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-blue-300">
+                      Buy
+                    </div>
                   </div>
                 </div>
               )}
@@ -106,9 +178,11 @@ export default function Header({ setShowLoginPopup, user, setUser }) {
         >
           O planerima
         </p>
+        {/* {user.role_id === 1 && ( */}
         <p className="cursor-pointer" onClick={() => navigate("/manage")}>
           Upravljanje podacima
         </p>
+        {/* )} */}
         <p className="cursor-pointer" onClick={() => navigate("/contact")}>
           Kontakt
         </p>

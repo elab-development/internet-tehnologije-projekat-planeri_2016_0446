@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export default function Step1({
   step,
   nextStep,
@@ -9,13 +11,14 @@ export default function Step1({
   selectedPageNumber,
   handlePageNumberChange,
 }) {
+  useEffect(() => {}, [planerTypes]);
   return (
     <div className="flex flex-col w-full h-full justify-center items-center p-10 gap-y-5">
       <div className="flex flex-row w-full h-full justify-center items-start">
         <div className="flex flex-col w-full h-full gap-y-5">
           <div className="flex flex-col w-full h-full justify-start items-start">
             <p className="text-2xl font-semibold">Izaberi vrstu planera</p>
-            {planerTypes.map((pType) => (
+            {planerTypes?.map((pType) => (
               <div key={pType.id} className="flex text-xl gap-x-5">
                 <input
                   type="radio"

@@ -41,8 +41,8 @@ export default function usePersonalizeData() {
   const [selectedCoverDesign, setSelectedCoverDesign] = useState(null);
   const [selectedFrontPage, setSelectedFrontPage] = useState(false);
 
-  const handleCoverTypeChange = (event) => {
-    setSelectedCoverType(event.target.value);
+  const handleCoverTypeChange = (cover) => {
+    setSelectedCoverType(cover);
   };
 
   const handleCoverDesignChange = (event) => {
@@ -88,8 +88,16 @@ export default function usePersonalizeData() {
   };
 
   const finishCustomization = async () => {
+    var array = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    const price = selectedPlanerType.price + selectedCoverType.price;
+
+    console.log("price", price);
+    console.log("price123", selectedPlanerType);
+    console.log("price456", selectedCoverType);
     const planer = {
-      planer_type_id: selectedPlanerType?.id,
+      id: array.length === 1 ? array.length : array.length + 1,
+      planerType: selectedPlanerType,
       cover_type: selectedCoverType,
       cover_design: selectedCoverDesign,
       size: selectedPlanerSize,
@@ -99,10 +107,15 @@ export default function usePersonalizeData() {
       page_number: selectedPageNumber,
       page_layout: selectedPlanerLayout,
       notes: selectedNoteType,
-      price: 0,
+      price: price,
     };
     console.log("p", planer);
-    await createPlanerRequest(planer);
+    // await createPlanerRequest(planer);
+    // localStorage.removeItem("cart");
+
+    array.push(planer);
+
+    localStorage.setItem("cart", JSON.stringify(array));
   };
 
   //////////////////////////////////////////
@@ -142,10 +155,6 @@ export default function usePersonalizeData() {
       };
     });
   };
-
-  useEffect(() => {
-    getPlanerTypesData();
-  }, []);
 
   useEffect(() => {
     switch (currentStep.id) {
