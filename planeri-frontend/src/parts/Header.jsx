@@ -20,7 +20,6 @@ export default function Header({
 
   const getCartItems = () => {
     var cItems = JSON.parse(localStorage.getItem("cart") || "[]");
-    console.log("c", cItems);
     const totalPrice = cItems.reduce(
       (sum, item) => sum + parseInt(item.price),
       0

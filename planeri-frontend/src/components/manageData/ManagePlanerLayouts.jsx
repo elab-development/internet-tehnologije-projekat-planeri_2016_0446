@@ -26,8 +26,9 @@ export default function ManagePlanerLayouts() {
 
   const createPlanerLayout = async () => {
     await createPlanerLayoutRequest({
-      name: editPlanerLayout.name,
-      price: editPlanerLayout.price,
+      name: editPlanerLayout?.name,
+      price: editPlanerLayout?.price,
+      planer_type_id: parseInt(editPlanerLayout.planer_type?.id),
     })
       .then(
         alert(
@@ -43,6 +44,7 @@ export default function ManagePlanerLayouts() {
       {
         name: editPlanerLayout.name,
         price: editPlanerLayout.price,
+        planer_type_id: editPlanerLayout.planer_type.id,
       },
       editPlanerLayout.id
     )
@@ -77,16 +79,22 @@ export default function ManagePlanerLayouts() {
           <div className="flex w-[10%]">ID</div>
           <div className="flex w-[20%]">Name</div>
           <div className="flex w-[15%]">Price</div>
+          <div className="flex w-[15%]">Planer type</div>
         </div>
         <div className="flex flex-col w-full h-[200px] overflow-y-scroll">
           {planerLayouts.map((planerLayout) => (
             <div
               onClick={() => selectPlanerLayout(planerLayout)}
-              className="flex flex-row w-full border pl-2 cursor-pointer"
+              className={`flex flex-row w-full border pl-2 cursor-pointer ${
+                planerLayout.id === editPlanerLayout?.id && "bg-orange-400"
+              }`}
             >
               <div className="flex w-[10%]">{planerLayout.id}</div>
               <div className="flex w-[20%]">{planerLayout.name}</div>
               <div className="flex w-[15%]">{planerLayout.price}</div>
+              <div className="flex w-[15%]">
+                {planerLayout.planer_type.name}
+              </div>
             </div>
           ))}
         </div>
@@ -124,16 +132,17 @@ export default function ManagePlanerLayouts() {
               <p>Planer type</p>
               <select
                 onChange={(event) => {
+                  console.log("e", event);
                   setEditPlanerLayout({
                     ...editPlanerLayout,
-                    planerType: event.target.value,
+                    planer_type_id: event.target.value,
                   });
                 }}
-                value={editPlanerLayout?.planerType.name}
+                value={editPlanerLayout?.planer_type}
                 className="w-full"
               >
                 {planerTypes.map((planerType) => (
-                  <option>{planerType.name}</option>
+                  <option value={planerType.id}>{planerType.name}</option>
                 ))}
               </select>
             </div>

@@ -11,7 +11,7 @@ class PlanerLayout extends Model
 
     function planerType()
     {
-        return $this->hasOne(PlanerType::class, 'planer_type_id');
+        return $this->belongsTo(PlanerType::class, 'planer_type_id');
     }
 
     protected $fillable = [

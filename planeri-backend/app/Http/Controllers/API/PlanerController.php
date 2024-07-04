@@ -10,7 +10,7 @@ class PlanerController extends Controller
 {
     public function getPlaners()
     {
-        $planers = Planer::all();
+        $planers = Planer::with('planerType')->get();
         return $planers;
     }
 

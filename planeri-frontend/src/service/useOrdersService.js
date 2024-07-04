@@ -2,8 +2,31 @@ import axios from "axios";
 
 export const useOrdersService = () => {
   const getOrdersRequest = async () => {
+    let userToken = localStorage.getItem("userToken");
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/orders");
+      const response = await axios.get("http://127.0.0.1:8000/api/orders", {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createOrderRequest = async (orderRequest) => {
+    let userToken = localStorage.getItem("userToken");
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/orders",
+        orderRequest,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       console.log(error);
@@ -35,6 +58,7 @@ export const useOrdersService = () => {
 
   return {
     getOrdersRequest,
+    createOrderRequest,
     updateOrderRequest,
     deleteOrderRequest,
   };

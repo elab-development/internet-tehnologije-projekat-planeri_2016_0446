@@ -31,11 +31,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/orders', [OrderController::class, 'getOrders']);
     Route::post('/orders', [OrderController::class, 'createOrder']);
 });
+
 Route::get('/planerTypes/search={searchExp}', [PlanerTypeController::class, 'getPlanerTypesBySearch']);
 Route::get('/planerLayouts/search={searchExp}', [PlanerLayoutController::class, 'getPlanerLayoutsBySearch']);
 Route::get('/users/search={searchExp}', [UserController::class, 'getUsersBySearch']);
 Route::resource('users', UserController::class);
-Route::get('/users/roles', [UserController::class, 'getRoles']);
+Route::get('/roles', [UserController::class, 'getRoles']);
 
 Route::get('/planers', [PlanerController::class, 'getPlaners']);
 Route::post('/planers', [PlanerController::class, 'createPlaner']);

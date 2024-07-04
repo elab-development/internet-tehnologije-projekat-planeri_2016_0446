@@ -13,7 +13,7 @@ class PlanerLayoutController extends Controller
      */
     public function index()
     {
-        $planerLayouts = PlanerLayout::all();
+        $planerLayouts = PlanerLayout::with('planerType')->get();
         return $planerLayouts;
     }
 
@@ -29,7 +29,6 @@ class PlanerLayoutController extends Controller
         try {
             $planerLayout = PlanerLayout::create([
                 'name' => $json['name'],
-                'image' => $json['image'],
                 'price' => $json['price'],
                 'planer_type_id' => $json['planer_type_id']
             ]);
@@ -61,7 +60,6 @@ class PlanerLayoutController extends Controller
         try {
             PlanerLayout::where('id', '=', $id)->update([
                 'name' => $json['name'],
-                'image' => $json['image'],
                 'price' => $json['price'],
                 'planer_type_id' => $json['planer_type_id']
             ]);

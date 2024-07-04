@@ -75,7 +75,9 @@ export default function ManageUsers() {
           {users.map((user) => (
             <div
               onClick={() => selectUser(user)}
-              className="flex flex-row w-full border pl-2 cursor-pointer"
+              className={`flex flex-row w-full border pl-2 cursor-pointer ${
+                user.id === editUser?.id && "bg-orange-400"
+              }`}
             >
               <div className="flex w-[10%]">{user.id}</div>
               <div className="flex w-[15%]">{user.name}</div>
@@ -114,6 +116,19 @@ export default function ManageUsers() {
               />
             </div>
             <div className="flex flex-col justify-start items-start">
+              <p>Password</p>
+              <input
+                onChange={(event) => {
+                  setEditUser({
+                    ...editUser,
+                    password: event.target.value,
+                  });
+                }}
+                value={editUser?.password}
+                className="w-full"
+              />
+            </div>
+            <div className="flex flex-col justify-start items-start">
               <p>Role</p>
               <select
                 onChange={(event) => {
@@ -122,7 +137,7 @@ export default function ManageUsers() {
                     role: event.target.value,
                   });
                 }}
-                value={editUser?.role.name}
+                value={editUser?.role?.name}
                 className="w-full"
               >
                 {roles.map((role) => (

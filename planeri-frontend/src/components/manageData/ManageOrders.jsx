@@ -16,7 +16,7 @@ export default function ManageOrders() {
     useOrdersService();
 
   const getOrdersData = async () => {
-    await getOrdersRequest().then((result) => setOrders(result));
+    await getOrdersRequest().then((result) => console.log("orders", orders));
   };
 
   const updateOrder = async () => {
@@ -59,7 +59,9 @@ export default function ManageOrders() {
           {orders.map((order) => (
             <div
               onClick={() => selectOrder(order)}
-              className="flex flex-row w-full border pl-2 cursor-pointer"
+              className={`flex flex-row w-full border pl-2 cursor-pointer ${
+                order.id === selectOrder?.id ? "bg-orange-400" : ""
+              }`}
             >
               <div className="flex w-[10%]">{order.id}</div>
               <div className="flex w-[15%]">{order.user}</div>

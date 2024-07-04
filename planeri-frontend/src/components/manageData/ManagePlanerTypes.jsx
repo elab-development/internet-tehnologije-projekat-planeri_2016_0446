@@ -69,7 +69,9 @@ export default function ManagePlanerTypes() {
           {planerTypes.map((planerType) => (
             <div
               onClick={() => selectPlanerType(planerType)}
-              className="flex flex-row w-full border pl-2 cursor-pointer"
+              className={`flex flex-row w-full border pl-2 cursor-pointer ${
+                planerType.id === editPlanerType?.id && "bg-orange-400"
+              }`}
             >
               <div className="flex w-[10%]">{planerType.id}</div>
               <div className="flex w-[15%]">{planerType.name}</div>

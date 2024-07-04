@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('planer_layouts', function (Blueprint $table) {
             $table->id();
             $table->string('name')->require();
-            $table->string('image')->require();
+            $table->string('image')->nullable();
             $table->string('price')->require();
             $table->integer('planer_type_id')->require();
             $table->timestamps();

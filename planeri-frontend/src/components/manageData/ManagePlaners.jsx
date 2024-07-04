@@ -57,13 +57,15 @@ export default function ManagePlaners() {
           {planers.map((planer) => (
             <div
               onClick={() => selectPlaner(planer)}
-              className="flex flex-row w-full border pl-2 cursor-pointer"
+              className={`flex flex-row w-full border pl-2 cursor-pointer ${
+                planer.id === editPlaner?.id && "bg-orange-400"
+              }`}
             >
               <div className="flex w-[5%]">{planer.id}</div>
               <div className="flex w-[8%]">{planer.cover}</div>
               <div className="flex w-[14%]">{planer.cover_design}</div>
               <div className="flex w-[10%]">{planer.size}</div>
-              <div className="flex w-[10%]">{planer.planer_type}</div>
+              <div className="flex w-[10%]">{planer.planer_type.name}</div>
               <div className="flex w-[16%]">{planer.page_layout}</div>
               <div className="flex w-[14%]">{planer.dates}</div>
               <div className="flex w-[10%]">{planer.notes}</div>
