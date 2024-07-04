@@ -59,7 +59,7 @@ export default function ManagePlanerTypes() {
 
   return (
     <div className="flex flex-col w-full h-full p-3 gap-y-5">
-      <div className="flex flex-col w-full h-full bg-cyan-600">
+      <div className="flex flex-col w-full h-full bg-[#FFFBEC]">
         <div className="flex flex-row w-full border pl-2 pr-4">
           <div className="flex w-[10%]">ID</div>
           <div className="flex w-[15%]">Name</div>

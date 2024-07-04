@@ -23,9 +23,9 @@ export default function HorizontalStepper({ steps, setSteps, setCurrentStep }) {
         <div className="flex flex-row h-full justify-center items-center">
           {!isFirstStep(index) && (
             <div className="flex relative">
-              <div className={`h-[2px] w-20 bg-green-300`}></div>
+              <div className={`h-[2px] w-20 bg-[#FFECA1]`}></div>
               <div
-                className={`absolute h-[2px] bg-green-500 ${
+                className={`absolute h-[2px] bg-orange-400 ${
                   step.isActive ? "fill-next-animation" : "fill-prev-animation"
                 }`}
               ></div>
@@ -37,7 +37,7 @@ export default function HorizontalStepper({ steps, setSteps, setCurrentStep }) {
               setCurrentStep(step);
             }}
             className={`relative flex col w-16 h-16 justify-center items-center rounded-full border-4 ${
-              step.isActive ? "border-green-500" : "border-green-200"
+              step.isActive ? "border-orange-400" : "bg-[#FFECA1]"
             } ${
               step.isActive
                 ? "fill-border-focus-animation"

@@ -97,7 +97,7 @@ function App() {
                   </div>
                   <div
                     onClick={() => handleLogin()}
-                    className="flex flex-col w-full h-fit px-6 py-1 rounded-lg justify-center items-center bg-green-700 text-white cursor-pointer"
+                    className="flex flex-col w-full h-fit px-6 py-1 rounded-lg justify-center items-center bg-orange-400 text-white cursor-pointer"
                   >
                     <p>Login</p>
                   </div>

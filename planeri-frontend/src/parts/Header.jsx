@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaSearch, FaShoppingCart, FaTrash, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useProductsService } from "../service/useProductsService";
 
@@ -10,6 +10,7 @@ export default function Header({
   setProductsByExp,
 }) {
   const navigate = useNavigate();
+  const [selectedMenuItem, setSelectedMenuItem] = useState("");
   const [showCart, setShowCart] = useState(false);
   const [showPopupUser, setShowPopupUser] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -92,13 +93,15 @@ export default function Header({
               {showPopupUser && user && (
                 <div
                   onMouseEnter={() => setShowPopupUser(true)}
-                  className="absolute flex flex-col h-fit w-40 bg-slate-500 translate-y-7 p-2 rounded-lg -translate-x-[40px] lg:-translate-x-[130px]"
+                  className="absolute flex flex-col h-fit w-40 gap-y-2 bg-[#FFECA1] border border-orange-950 translate-y-7 p-2 rounded-lg -translate-x-[40px] lg:-translate-x-[130px]"
                 >
                   <p>{user.name}</p>
                   <div className="h-[1px] bg-black"> </div>
-                  <p>My orders</p>
+                  <p className="cursor-pointer hover:bg-orange-400 rounded-lg">
+                    My orders
+                  </p>
                   <p
-                    className="cursor-pointer hover:bg-red-600 rounded-lg"
+                    className="cursor-pointer hover:bg-orange-400 rounded-lg"
                     onClick={() => {
                       localStorage.removeItem("userInfo");
                       setUser(null);
@@ -121,7 +124,7 @@ export default function Header({
                 <FaShoppingCart className="relative size-6 cursor-pointer" />
               </div>
               {showCart && (
-                <div className="flex flex-col w-[300px] h-[450px] gap-y-3 justify-between items-center p-5 bg-red-300 -translate-x-[270px] translate-y-7 absolute">
+                <div className="flex flex-col w-[300px] h-[450px] gap-y-3 justify-between items-center p-5 bg-[#FFECA1] rounded-xl border border-orange-950 -translate-x-[270px] translate-y-7 absolute">
                   <div className="flex flex-col w-full gap-y-4">
                     <p className="text-xl font-semibold">Cart</p>
                     <div className="h-[1px] bg-gray-800 w-full"></div>
@@ -129,21 +132,27 @@ export default function Header({
 
                   <div className="flex flex-col w-full h-full gap-y-2 overflow-y-auto">
                     {cartItems.map((cItem) => (
-                      <div className="flex flex-row w-full h-fit gap-x-5 items-center border border-gray-800 p-1">
-                        <div className="flex w-10 h-10 border border-gray-800"></div>
+                      <div className="flex flex-row w-full h-fit gap-x-5 justify-between items-center border border-gray-800 p-1">
+                        <div className="flex w-10 h-10 justify-center items-center border border-gray-800">
+                          <p>
+                            {cItem.planerType
+                              ? cItem.planerType.name[0]
+                              : cItem.name[0]}
+                          </p>
+                        </div>
                         <div className="flex flex-col">
                           <p>
                             {cItem.planerType
                               ? cItem.planerType.name
                               : cItem.name}
                           </p>
-                          <p>Price: {cItem.price} djunti</p>
+                          <p>Price: {cItem.price}</p>
                         </div>
                         <div
                           onClick={() => removeCartItem(cItem.id)}
-                          className="flex flex-col w-10 h-10 items-center justify-center text-lg bg-red-500 cursor-pointer"
+                          className="flex flex-col w-10 h-10 items-center justify-center text-lg hover:bg-orange-400 hover:rounded-xl cursor-pointer"
                         >
-                          X
+                          <FaTrash />
                         </div>
                       </div>
                     ))}
@@ -154,7 +163,7 @@ export default function Header({
                       <p>Price: </p>
                       <p>{price} din</p>
                     </div>
-                    <div className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-blue-300">
+                    <div className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-orange-400">
                       Buy
                     </div>
                   </div>
@@ -164,25 +173,62 @@ export default function Header({
           </div>
         </div>
       </div>
-      <div className="flex flex-row w-full h-8 bg-green-900 justify-center items-center gap-x-40 text-white">
-        <p className="cursor-pointer" onClick={() => navigate("/planers")}>
+      <div className="flex flex-row w-full h-8 bg-[#FFECA1] justify-center items-center gap-x-40 text-black">
+        <p
+          className={`cursor-pointer hover:bg-orange-400 ${
+            selectedMenuItem === "Planeri" && "bg-orange-400"
+          } p-1 rounded-lg`}
+          onClick={() => {
+            setSelectedMenuItem("Planers");
+            navigate("/planers");
+          }}
+        >
           Planeri
         </p>
-        <p className="cursor-pointer" onClick={() => navigate("/personalize")}>
+        <p
+          className={`cursor-pointer hover:bg-orange-400 ${
+            selectedMenuItem === "Personalize" && "bg-orange-400"
+          } p-1 rounded-lg`}
+          onClick={() => {
+            setSelectedMenuItem("Personalize");
+            navigate("/personalize");
+          }}
+        >
           Personalizuj
         </p>
         <p
-          className="cursor-pointer"
-          onClick={() => navigate("/aboutPlanners")}
+          className={`cursor-pointer hover:bg-orange-400 ${
+            selectedMenuItem === "About" && "bg-orange-400"
+          } p-1 rounded-lg`}
+          onClick={() => {
+            setSelectedMenuItem("About");
+            navigate("/aboutPlanners");
+          }}
         >
           O planerima
         </p>
         {/* {user.role_id === 1 && ( */}
-        <p className="cursor-pointer" onClick={() => navigate("/manage")}>
+        <p
+          className={`cursor-pointer hover:bg-orange-400 ${
+            selectedMenuItem === "Manage" && "bg-orange-400"
+          } p-1 rounded-lg`}
+          onClick={() => {
+            setSelectedMenuItem("Manage");
+            navigate("/manage");
+          }}
+        >
           Upravljanje podacima
         </p>
         {/* )} */}
-        <p className="cursor-pointer" onClick={() => navigate("/contact")}>
+        <p
+          className={`cursor-pointer hover:bg-orange-400 ${
+            selectedMenuItem === "Contact" && "bg-orange-400"
+          } p-1 rounded-lg`}
+          onClick={() => {
+            setSelectedMenuItem("Contact");
+            navigate("/contact");
+          }}
+        >
           Kontakt
         </p>
       </div>

@@ -51,22 +51,22 @@ export default function ManageData() {
   };
 
   return (
-    <div className="flex flex-row w-full h-full justify-center items-center px-5">
-      <div className="flex flex-col w-[20%] h-full justify-start items-center gap-y-4 bg-orange-700 p-5">
-        {tabs.map((tab) => {
-          return (
-            <div
-              className={`flex w-full justify-center rounded-lg ${
-                tab.isSelected && "bg-slate-500"
-              } hover:bg-slate-500 cursor-pointer`}
-              onClick={() => updateTabs(tab.id)}
-            >
-              {tab.displayText}
-            </div>
-          );
-        })}
-      </div>
-      <div className="flex flex-col w-full h-full justify-center bg-orange-900">
+    <div className="flex flex-row w-3/4 h-full justify-center items-start px-5">
+      <div className="flex flex-col w-full h-full justify-center bg-[#FFECA1] p-2">
+        <div className="flex flex-row w-full h-fit justify-between gap-x-2">
+          {tabs.map((tab) => {
+            return (
+              <div
+                className={`flex w-full h-10 justify-center items-center rounded-lg ${
+                  tab.isSelected && "bg-orange-400"
+                } hover:bg-orange-400 cursor-pointer`}
+                onClick={() => updateTabs(tab.id)}
+              >
+                {tab.displayText}
+              </div>
+            );
+          })}
+        </div>
         {tabs.find((tab) => tab.isSelected)?.content}
       </div>
     </div>

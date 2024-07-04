@@ -83,7 +83,7 @@ export default function Step1({
       <div className="flex flex-col w-full h-fit justify-center items-end">
         <div
           onClick={() => nextStep(step)}
-          className="flex w-[20%] h-10 justify-center items-center bg-green-800 rounded-lg text-white"
+          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
         >
           Next step
         </div>

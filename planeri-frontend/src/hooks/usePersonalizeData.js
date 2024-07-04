@@ -92,9 +92,6 @@ export default function usePersonalizeData() {
 
     const price = selectedPlanerType.price + selectedCoverType.price;
 
-    console.log("price", price);
-    console.log("price123", selectedPlanerType);
-    console.log("price456", selectedCoverType);
     const planer = {
       id: array.length === 1 ? array.length : array.length + 1,
       planerType: selectedPlanerType,

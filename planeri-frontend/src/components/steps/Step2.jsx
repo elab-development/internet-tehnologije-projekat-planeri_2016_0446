@@ -106,13 +106,13 @@ export default function Step2({
       <div className="flex flex-row w-full h-fit justify-between items-center">
         <div
           onClick={() => prevStep(step)}
-          className="flex w-[20%] h-10 justify-center items-center bg-green-800 rounded-lg text-white"
+          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
         >
           Previous step
         </div>
         <div
           onClick={() => nextStep(step)}
-          className="flex w-[20%] h-10 justify-center items-center bg-green-800 rounded-lg text-white"
+          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
         >
           Next step
         </div>

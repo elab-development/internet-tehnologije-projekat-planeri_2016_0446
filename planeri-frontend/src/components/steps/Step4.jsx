@@ -14,7 +14,7 @@ export default function Step4({
     <div className="flex flex-col w-full h-full justify-center items-center p-10 gap-y-5">
       <div className="flex flex-row w-full h-full justify-center items-start">
         <div className="flex flex-col w-full h-full gap-y-5">
-          {selectedPlanerType.name === "Bullet" ? (
+          {selectedPlanerType?.name === "Bullet" ? (
             <div className="flex flex-col w-full h-full justify-start items-start">
               <p className="text-2xl font-semibold">
                 Izaberite izgled stranica
@@ -118,13 +118,13 @@ export default function Step4({
       <div className="flex flex-row w-full h-fit justify-between items-center">
         <div
           onClick={() => prevStep(step)}
-          className="flex w-[20%] h-10 justify-center items-center bg-green-800 rounded-lg text-white"
+          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
         >
           Previous step
         </div>
         <div
           onClick={() => finishCustomization()}
-          className="flex w-[20%] h-10 justify-center items-center bg-green-800 rounded-lg text-white"
+          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
         >
           Finish customization
         </div>

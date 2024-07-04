@@ -45,19 +45,19 @@ code {
 
 @keyframes borderFillFocus {
   0% {
-    border-color: #92edb3;
+    border-color: #FFECA1;
   }
   100% {
-    border-color: #22c55e; /* Blue color example */
+    border-color: #FB923C; /* Blue color example */
   }
 }
 
 @keyframes borderFillUnfocus {
   0% {
-    border-color: #22c55e;
+    border-color: #FB923C;
   }
   100% {
-    border-color: #92edb3; /* Blue color example */
+    border-color: #FFECA1; /* Blue color example */
   }
 }
 
