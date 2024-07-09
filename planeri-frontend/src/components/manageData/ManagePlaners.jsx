@@ -44,14 +44,14 @@ export default function ManagePlaners() {
       <div className="flex flex-col w-full h-full bg-[#FFFBEC]">
         <div className="flex flex-row w-full border pl-2 pr-4">
           <div className="flex w-[5%]">ID</div>
-          <div className="flex w-[8%]">Cover</div>
-          <div className="flex w-[14%]">CoverDesign</div>
-          <div className="flex w-[10%]">Size</div>
-          <div className="flex w-[10%]">PlanerType</div>
-          <div className="flex w-[16%]">PlanerTypeLayout</div>
-          <div className="flex w-[14%]">Dates</div>
-          <div className="flex w-[10%]">Notes</div>
-          <div className="flex w-[10%]">PageNumbers</div>
+          <div className="flex w-[8%]">Korica</div>
+          <div className="flex w-[14%]">Dizajn korice</div>
+          <div className="flex w-[10%]">Velicina</div>
+          <div className="flex w-[10%]">Tip planera</div>
+          <div className="flex w-[16%]">Raspored planera</div>
+          <div className="flex w-[14%]">Datumi</div>
+          <div className="flex w-[10%]">Beleske</div>
+          <div className="flex w-[10%]">Broj strana</div>
         </div>
         <div className="flex flex-col w-full h-[200px] overflow-y-scroll">
           {planers.map((planer) => (
@@ -78,7 +78,7 @@ export default function ManagePlaners() {
         <div className="flex flex-row w-2/3 h-full gap-x-5">
           <div className="flex flex-col w-full gap-y-5">
             <div className="flex flex-col justify-start items-start">
-              <p>Cover</p>
+              <p>Korice</p>
               <select
                 onChange={(event) => {
                   setEditPlaner({
@@ -95,7 +95,7 @@ export default function ManagePlaners() {
               </select>
             </div>
             <div className="flex flex-col justify-start items-start">
-              <p>Cover design</p>
+              <p>Dizajn korice</p>
               <select
                 onChange={(event) => {
                   setEditPlaner({
@@ -112,7 +112,7 @@ export default function ManagePlaners() {
               </select>
             </div>
             <div className="flex flex-col justify-start items-start">
-              <p>Size</p>
+              <p>Velicina</p>
               <select
                 onChange={(event) => {
                   setEditPlaner({
@@ -129,7 +129,7 @@ export default function ManagePlaners() {
               </select>
             </div>
             <div className="flex flex-col justify-start items-start">
-              <p>Planer type</p>
+              <p>Tip planera</p>
               <select
                 onChange={(event) => {
                   setEditPlaner({
@@ -148,7 +148,7 @@ export default function ManagePlaners() {
           </div>
           <div className="flex flex-col w-full gap-y-5">
             <div className="flex flex-col justify-start items-start">
-              <p>Planer layout</p>
+              <p>Raspored planera</p>
               <select
                 onChange={(event) => {
                   setEditPlaner({
@@ -165,7 +165,7 @@ export default function ManagePlaners() {
               </select>
             </div>
             <div className="flex flex-col justify-start items-start">
-              <p>Dates</p>
+              <p>Datumi</p>
               <select
                 onChange={(event) => {
                   setEditPlaner({
@@ -182,7 +182,7 @@ export default function ManagePlaners() {
               </select>
             </div>
             <div className="flex flex-col justify-start items-start">
-              <p>Notes</p>
+              <p>Beleske</p>
               <select
                 onChange={(event) => {
                   setEditPlaner({
@@ -199,7 +199,7 @@ export default function ManagePlaners() {
               </select>
             </div>
             <div className="flex flex-col justify-start items-start">
-              <p>Page number</p>
+              <p>Broj strana</p>
               <select
                 onChange={(event) => {
                   setEditPlaner({
@@ -222,13 +222,13 @@ export default function ManagePlaners() {
             onClick={() => createPlaner()}
             className="flex w-full h-10 justify-center items-center bg-orange-400 rounded-lg font-bold text-lg cursor-pointer"
           >
-            Add
+            Dodaj
           </div>
           <div className="flex w-full h-10 justify-center items-center bg-blue-600 rounded-lg font-bold text-lg">
-            Edit
+            Izmeni
           </div>
           <div className="flex w-full h-10 justify-center items-center bg-red-600 rounded-lg font-bold text-lg">
-            Delete
+            Obrisi
           </div>
         </div>
       </div>

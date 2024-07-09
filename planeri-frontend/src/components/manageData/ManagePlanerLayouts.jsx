@@ -77,9 +77,9 @@ export default function ManagePlanerLayouts() {
       <div className="flex flex-col w-full h-full bg-[#FFFBEC]">
         <div className="flex flex-row w-full border pl-2 pr-4">
           <div className="flex w-[10%]">ID</div>
-          <div className="flex w-[20%]">Name</div>
-          <div className="flex w-[15%]">Price</div>
-          <div className="flex w-[15%]">Planer type</div>
+          <div className="flex w-[20%]">Naziv</div>
+          <div className="flex w-[15%]">Cena</div>
+          <div className="flex w-[15%]">Tip planera</div>
         </div>
         <div className="flex flex-col w-full h-[200px] overflow-y-scroll">
           {planerLayouts.map((planerLayout) => (
@@ -103,7 +103,7 @@ export default function ManagePlanerLayouts() {
         <div className="flex flex-row w-2/3 h-full gap-x-5">
           <div className="flex flex-col w-full gap-y-5">
             <div className="flex flex-col justify-start items-start">
-              <p>Name</p>
+              <p>Naziv</p>
               <input
                 onChange={(event) => {
                   setEditPlanerLayout({
@@ -116,7 +116,7 @@ export default function ManagePlanerLayouts() {
               />
             </div>
             <div className="flex flex-col justify-start items-start">
-              <p>Price</p>
+              <p>Cena</p>
               <input
                 onChange={(event) => {
                   setEditPlanerLayout({
@@ -129,7 +129,7 @@ export default function ManagePlanerLayouts() {
               />
             </div>
             <div className="flex flex-col justify-start items-start">
-              <p>Planer type</p>
+              <p>Tip planera</p>
               <select
                 onChange={(event) => {
                   console.log("e", event);
@@ -153,19 +153,19 @@ export default function ManagePlanerLayouts() {
             onClick={() => createPlanerLayout()}
             className="flex w-full h-10 justify-center items-center bg-orange-400 rounded-lg font-bold text-lg cursor-pointer"
           >
-            Add
+            Dodaj
           </div>
           <div
             onClick={() => updatePlanerLayout()}
             className="flex w-full h-10 justify-center items-center bg-blue-600 rounded-lg font-bold text-lg"
           >
-            Edit
+            Izmeni
           </div>
           <div
             onClick={() => deletePlanerLayout()}
             className="flex w-full h-10 justify-center items-center bg-red-600 rounded-lg font-bold text-lg"
           >
-            Delete
+            Obrisi
           </div>
         </div>
       </div>

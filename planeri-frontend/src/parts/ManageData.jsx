@@ -9,31 +9,31 @@ export default function ManageData() {
   const [tabs, setTabs] = useState([
     {
       id: 1,
-      displayText: "Planers",
+      displayText: "Planeri",
       content: <ManagePlaners></ManagePlaners>,
       isSelected: false,
     },
     {
       id: 2,
-      displayText: "Planer Types",
+      displayText: "Tipovi planera",
       content: <ManagePlanerTypes></ManagePlanerTypes>,
       isSelected: false,
     },
     {
       id: 3,
-      displayText: "Planer Layouts",
+      displayText: "Raspored planera",
       content: <ManagePlanerLayouts></ManagePlanerLayouts>,
       isSelected: false,
     },
     {
       id: 4,
-      displayText: "Orders",
+      displayText: "Porudzbine",
       content: <ManageOrders></ManageOrders>,
       isSelected: false,
     },
     {
       id: 5,
-      displayText: "Users",
+      displayText: "Korisnici",
       content: <ManageUsers></ManageUsers>,
       isSelected: false,
     },

@@ -110,7 +110,7 @@ export default function Header({
                   <p>{user.name}</p>
                   <div className="h-[1px] bg-black"> </div>
                   <p className="cursor-pointer hover:bg-orange-400 rounded-lg">
-                    My orders
+                    Moje porudzbine
                   </p>
                   <p
                     className="cursor-pointer hover:bg-orange-400 rounded-lg"
@@ -120,7 +120,7 @@ export default function Header({
                       alert("Uspesno ste se izlogovali!");
                     }}
                   >
-                    Logout
+                    Odjavi se
                   </p>
                 </div>
               )}
@@ -138,7 +138,7 @@ export default function Header({
               {showCart && (
                 <div className="flex flex-col w-[300px] h-[450px] gap-y-3 justify-between items-center p-5 bg-[#FFECA1] rounded-xl border border-orange-950 -translate-x-[270px] translate-y-7 absolute">
                   <div className="flex flex-col w-full gap-y-4">
-                    <p className="text-xl font-semibold">Cart</p>
+                    <p className="text-xl font-semibold">Korpa</p>
                     <div className="h-[1px] bg-gray-800 w-full"></div>
                   </div>
 
@@ -172,14 +172,14 @@ export default function Header({
 
                   <div className="flex flex-col w-full gap-y-3">
                     <div className="flex flex-row w-full justify-between">
-                      <p>Price: </p>
+                      <p>Cena: </p>
                       <p>{price} din</p>
                     </div>
                     <div
                       onClick={() => generatePdf()}
                       className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-orange-400"
                     >
-                      Buy
+                      Kupi
                     </div>
                   </div>
                 </div>

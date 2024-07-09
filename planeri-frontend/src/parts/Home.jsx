@@ -38,7 +38,7 @@ export default function Home() {
           <p className="text-2xl">Savrseni planer za tebe</p>
           <p>2 NACINA DA GA PRILAGODITE SEBI</p>
         </div>
-        <div className="flex flex-row w-full justify-center gap-x-20">
+        <div className="flex flex-row w-full justify-center gap-x-20 mb-5">
           <div className="flex flex-col w-full h-[350px] justify-between items-center border border-black gap-y-3 py-2 px-10">
             <p>OPCIJA 1</p>
             <div className="flex flex-col justify-center items-center gap-y-2">
@@ -73,32 +73,6 @@ export default function Home() {
               <p>PERSONALIZUJ SVE</p>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="flex flex-row w-full h-fit justify-around bg-slate-600 text-white py-3">
-        <div className="flex flex-col gap-y-2 w-fit">
-          <p>Header 1</p>
-          <div className="w-full h-[1px] bg-slate-900"></div>
-          <p>Opcija 1</p>
-          <p>Opcija 2</p>
-          <p>Opcija 3</p>
-          <p>Opcija 4</p>
-        </div>
-        <div className="flex flex-col gap-y-2 w-fit">
-          <p>Header 2</p>
-          <div className="w-full h-[1px] bg-slate-900"></div>
-          <p>Opcija 1</p>
-          <p>Opcija 2</p>
-          <p>Opcija 3</p>
-          <p>Opcija 4</p>
-        </div>
-        <div className="flex flex-col gap-y-2 w-fit">
-          <p>Header 3</p>
-          <div className="w-full h-[1px] bg-slate-900"></div>
-          <p>Opcija 1</p>
-          <p>Opcija 2</p>
-          <p>Opcija 3</p>
-          <p>Opcija 4</p>
         </div>
       </div>
     </div>

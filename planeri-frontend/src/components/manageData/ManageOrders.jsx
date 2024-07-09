@@ -51,8 +51,8 @@ export default function ManageOrders() {
       <div className="flex flex-col w-full h-full bg-[#FFFBEC]">
         <div className="flex flex-row w-full border pl-2 pr-4">
           <div className="flex w-[10%]">ID</div>
-          <div className="flex w-[15%]">User</div>
-          <div className="flex w-[15%]">Price</div>
+          <div className="flex w-[15%]">Korisnik</div>
+          <div className="flex w-[15%]">Cena</div>
           <div className="flex w-[15%]">Status</div>
         </div>
         <div className="flex flex-col w-full h-[200px] overflow-y-scroll">
@@ -75,7 +75,7 @@ export default function ManageOrders() {
         <div className="flex flex-row w-2/3 h-full gap-x-5">
           <div className="flex flex-col w-full gap-y-5">
             <div className="flex flex-col justify-start items-start">
-              <p>Price</p>
+              <p>Cena</p>
               <input
                 onChange={(event) => {
                   setEditOrder({
@@ -111,13 +111,13 @@ export default function ManageOrders() {
             onClick={() => updateOrder()}
             className="flex w-full h-10 justify-center items-center bg-blue-600 rounded-lg font-bold text-lg"
           >
-            Edit
+            Izmeni
           </div>
           <div
             onClick={() => deleteOrder()}
             className="flex w-full h-10 justify-center items-center bg-red-600 rounded-lg font-bold text-lg"
           >
-            Delete
+            Obrisi
           </div>
         </div>
       </div>
