@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/orders', [OrderController::class, 'createOrder']);
 });
 
+Route::post('/generate-pdf', [OrderController::class, 'generateBillToPdf']);
+
 Route::get('/planerTypes/search={searchExp}', [PlanerTypeController::class, 'getPlanerTypesBySearch']);
 Route::get('/planerLayouts/search={searchExp}', [PlanerLayoutController::class, 'getPlanerLayoutsBySearch']);
 Route::get('/users/search={searchExp}', [UserController::class, 'getUsersBySearch']);

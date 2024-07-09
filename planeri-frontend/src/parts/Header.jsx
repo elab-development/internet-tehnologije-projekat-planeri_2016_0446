@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaSearch, FaShoppingCart, FaTrash, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useProductsService } from "../service/useProductsService";
+import { useOrdersService } from "../service/useOrdersService";
 
 export default function Header({
   setShowLoginPopup,
@@ -18,6 +19,7 @@ export default function Header({
   const [price, setPrice] = useState(0);
 
   const { getProductsBySearchRequest } = useProductsService();
+  const { generatePdfRequest } = useOrdersService();
 
   const getCartItems = () => {
     var cItems = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -43,7 +45,7 @@ export default function Header({
 
   useEffect(() => {
     getCartItems();
-  }, [showCart, cartItems]);
+  }, [showCart]);
 
   const removeCartItem = (id) => {
     var cItems = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -53,6 +55,16 @@ export default function Header({
     const totalPrice = updatedItems.reduce((sum, item) => sum + item.price, 0);
     localStorage.setItem("cart", JSON.stringify(updatedItems));
     setPrice(totalPrice);
+  };
+
+  const generatePdf = async () => {
+    let generatePdfRequestModel = {
+      items: cartItems,
+      price: price,
+    };
+    await generatePdfRequest(generatePdfRequestModel).then(() =>
+      alert("Download started!")
+    );
   };
 
   return (
@@ -163,7 +175,10 @@ export default function Header({
                       <p>Price: </p>
                       <p>{price} din</p>
                     </div>
-                    <div className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-orange-400">
+                    <div
+                      onClick={() => generatePdf()}
+                      className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-orange-400"
+                    >
                       Buy
                     </div>
                   </div>

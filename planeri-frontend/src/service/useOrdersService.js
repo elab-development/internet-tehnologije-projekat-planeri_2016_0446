@@ -33,6 +33,27 @@ export const useOrdersService = () => {
     }
   };
 
+  const generatePdfRequest = async (generatePdfRequest) => {
+    try {
+      const response = await axios({
+        url: "http://127.0.0.1:8000/api/generate-pdf",
+        method: "POST",
+        data: generatePdfRequest,
+        responseType: "blob",
+      });
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "bill.pdf");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const updateOrderRequest = async (order, orderId) => {
     try {
       const response = await axios.patch(
@@ -59,6 +80,7 @@ export const useOrdersService = () => {
   return {
     getOrdersRequest,
     createOrderRequest,
+    generatePdfRequest,
     updateOrderRequest,
     deleteOrderRequest,
   };
