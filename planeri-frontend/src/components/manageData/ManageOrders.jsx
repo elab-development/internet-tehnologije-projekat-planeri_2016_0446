@@ -16,7 +16,7 @@ export default function ManageOrders() {
     useOrdersService();
 
   const getOrdersData = async () => {
-    await getOrdersRequest().then((result) => console.log("orders", orders));
+    await getOrdersRequest().then((result) => setOrders(result));
   };
 
   const updateOrder = async () => {
@@ -27,13 +27,13 @@ export default function ManageOrders() {
       },
       editOrder.id
     )
-      .then(alert(`Order successfully updated: ${editOrder.name}`))
+      .then(alert(`Order successfully updated!`))
       .finally(getOrdersData());
   };
 
   const deleteOrder = async () => {
     await deleteOrderRequest(editOrder.id)
-      .then(alert(`Order successfully deleted: ${editOrder.name}`))
+      .then(alert(`Order successfully deleted!`))
       .then(getOrdersData())
       .finally(setEditOrder({}));
   };
@@ -60,11 +60,11 @@ export default function ManageOrders() {
             <div
               onClick={() => selectOrder(order)}
               className={`flex flex-row w-full border pl-2 cursor-pointer ${
-                order.id === selectOrder?.id ? "bg-orange-400" : ""
+                order.id === editOrder?.id ? "bg-orange-400" : ""
               }`}
             >
               <div className="flex w-[10%]">{order.id}</div>
-              <div className="flex w-[15%]">{order.user}</div>
+              <div className="flex w-[15%]">{order.user.email}</div>
               <div className="flex w-[15%]">{order.price}</div>
               <div className="flex w-[15%]">{order.status}</div>
             </div>

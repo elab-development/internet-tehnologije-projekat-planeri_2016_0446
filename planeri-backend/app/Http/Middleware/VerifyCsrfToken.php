@@ -23,6 +23,7 @@ class VerifyCsrfToken extends Middleware
         'api/register',
         'api/login',
         'api/orders',
-        'api/generate-pdf'
+        'api/orders/*',
+        'api/generate-pdf',
     ];
 }

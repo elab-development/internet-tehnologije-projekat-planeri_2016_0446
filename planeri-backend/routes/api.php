@@ -30,9 +30,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/orders', [OrderController::class, 'getOrders']);
     Route::post('/orders', [OrderController::class, 'createOrder']);
+    Route::put('/orders/{id}', [OrderController::class, 'updateOrder']);
+    Route::delete('/orders/{id}', [OrderController::class, 'deleteOrder']);
 });
 
 Route::post('/generate-pdf', [OrderController::class, 'generateBillToPdf']);
+
 
 Route::get('/planerTypes/search={searchExp}', [PlanerTypeController::class, 'getPlanerTypesBySearch']);
 Route::get('/planerLayouts/search={searchExp}', [PlanerLayoutController::class, 'getPlanerLayoutsBySearch']);

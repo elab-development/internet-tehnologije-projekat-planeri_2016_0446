@@ -19,7 +19,7 @@ export default function Header({
   const [price, setPrice] = useState(0);
 
   const { getProductsBySearchRequest } = useProductsService();
-  const { generatePdfRequest } = useOrdersService();
+  const { createOrderRequest, generatePdfRequest } = useOrdersService();
 
   const getCartItems = () => {
     var cItems = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -55,6 +55,19 @@ export default function Header({
     const totalPrice = updatedItems.reduce((sum, item) => sum + item.price, 0);
     localStorage.setItem("cart", JSON.stringify(updatedItems));
     setPrice(totalPrice);
+  };
+
+  const createOrder = async () => {
+    let orderRequest = {
+      user_id: user.id,
+      price: price,
+      status: "Paid",
+      orderItems: cartItems,
+    };
+    await createOrderRequest(orderRequest)
+      .then(() => generatePdf())
+      .then(() => setCartItems([]))
+      .then(() => localStorage.setItem("cart", JSON.stringify([])));
   };
 
   const generatePdf = async () => {
@@ -176,7 +189,7 @@ export default function Header({
                       <p>{price} din</p>
                     </div>
                     <div
-                      onClick={() => generatePdf()}
+                      onClick={() => createOrder()}
                       className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-orange-400"
                     >
                       Kupi

@@ -55,10 +55,17 @@ export const useOrdersService = () => {
   };
 
   const updateOrderRequest = async (order, orderId) => {
+    let userToken = localStorage.getItem("userToken");
+
     try {
-      const response = await axios.patch(
+      const response = await axios.put(
         `http://127.0.0.1:8000/api/orders/${orderId}`,
-        order
+        order,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -67,9 +74,16 @@ export const useOrdersService = () => {
   };
 
   const deleteOrderRequest = async (orderId) => {
+    let userToken = localStorage.getItem("userToken");
+
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:8000/api/orders/${orderId}`
+        `http://127.0.0.1:8000/api/orders/${orderId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {

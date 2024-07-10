@@ -9,10 +9,14 @@ class ListOfOrderItems extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = ['id', 'order_id'];
+    protected $fillable = [
+        'order_id',
+        'planer_id',
+    ];
+
 
     function order()
     {
-        return $this->belongsTo(Order::class, 'id', 'order_id');
+        return $this->belongsTo(Order::class, 'id');
     }
 }
