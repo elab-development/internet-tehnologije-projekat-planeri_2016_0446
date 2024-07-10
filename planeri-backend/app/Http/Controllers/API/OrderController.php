@@ -17,6 +17,12 @@ class OrderController extends Controller
         return $orders;
     }
 
+    public function getOrdersForUser(string $id)
+    {
+        $orders = Order::with("user")->where('user_id', '=', (int)$id)->get();
+        return $orders;
+    }
+
     public function createOrder(Request $request)
     {
         $json = $request->json()->all();

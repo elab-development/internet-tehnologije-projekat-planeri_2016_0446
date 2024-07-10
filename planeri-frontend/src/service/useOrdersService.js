@@ -15,6 +15,17 @@ export const useOrdersService = () => {
     }
   };
 
+  const getOrdersForUserRequest = async (userId) => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/orders/${userId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const createOrderRequest = async (orderRequest) => {
     let userToken = localStorage.getItem("userToken");
     try {
@@ -93,6 +104,7 @@ export const useOrdersService = () => {
 
   return {
     getOrdersRequest,
+    getOrdersForUserRequest,
     createOrderRequest,
     generatePdfRequest,
     updateOrderRequest,

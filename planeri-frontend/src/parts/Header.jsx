@@ -122,7 +122,10 @@ export default function Header({
                 >
                   <p>{user.name}</p>
                   <div className="h-[1px] bg-black"> </div>
-                  <p className="cursor-pointer hover:bg-orange-400 rounded-lg">
+                  <p
+                    onClick={() => navigate("/myOrders")}
+                    className="cursor-pointer hover:bg-orange-400 rounded-lg"
+                  >
                     Moje porudzbine
                   </p>
                   <p

@@ -9,6 +9,7 @@ import axios from "axios";
 import Planers from "./parts/Planers";
 import Contact from "./parts/Contact";
 import AboutPlaners from "./parts/AboutPlaners";
+import MyOrders from "./parts/MyOrders";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -62,6 +63,7 @@ function App() {
           <Route path="/aboutPlanners" element={<AboutPlaners />} />
           <Route path="/manage" element={<ManageData />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/myOrders" element={<MyOrders user={user} />} />
         </Routes>
         {showLoginPopup && (
           <>
