@@ -36,7 +36,6 @@ export const useUsersService = () => {
   const getRolesRequest = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/roles");
-      console.log("dd", response.data);
       return response.data;
     } catch (error) {
       console.log(error);

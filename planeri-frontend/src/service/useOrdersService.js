@@ -26,6 +26,24 @@ export const useOrdersService = () => {
     }
   };
 
+  const getOrderItemsRequest = async (orderId) => {
+    let userToken = localStorage.getItem("userToken");
+
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/orders/${orderId}/orderItems`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const createOrderRequest = async (orderRequest) => {
     let userToken = localStorage.getItem("userToken");
     try {
@@ -105,6 +123,7 @@ export const useOrdersService = () => {
   return {
     getOrdersRequest,
     getOrdersForUserRequest,
+    getOrderItemsRequest,
     createOrderRequest,
     generatePdfRequest,
     updateOrderRequest,

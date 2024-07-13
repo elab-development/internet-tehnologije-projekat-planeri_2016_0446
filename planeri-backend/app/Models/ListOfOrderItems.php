@@ -17,6 +17,11 @@ class ListOfOrderItems extends Model
 
     function order()
     {
-        return $this->belongsTo(Order::class, 'id');
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    function planer()
+    {
+        return $this->belongsTo(Planer::class, 'planer_id');
     }
 }

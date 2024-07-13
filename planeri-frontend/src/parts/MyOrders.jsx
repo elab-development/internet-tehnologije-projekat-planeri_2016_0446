@@ -5,7 +5,6 @@ export default function MyOrders({ user }) {
   const [userOrders, setUserOrders] = useState([]);
   const { getOrdersForUserRequest } = useOrdersService();
 
-  console.log("u", user);
   const getOrdersForUserData = async () => {
     await getOrdersForUserRequest(Number(user?.id)).then((result) =>
       setUserOrders(result)

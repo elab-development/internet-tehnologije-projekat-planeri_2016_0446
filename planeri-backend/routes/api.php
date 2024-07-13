@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/orders', [OrderController::class, 'createOrder']);
     Route::put('/orders/{id}', [OrderController::class, 'updateOrder']);
     Route::delete('/orders/{id}', [OrderController::class, 'deleteOrder']);
+    Route::get('/orders/{id}/orderItems', [OrderController::class, 'getOrderItems']);
 });
 
 Route::post('/generate-pdf', [OrderController::class, 'generateBillToPdf']);
@@ -48,4 +49,5 @@ Route::post('/planers', [PlanerController::class, 'createPlaner']);
 Route::resource('planerTypes', PlanerTypeController::class);
 Route::resource('planerLayouts', PlanerLayoutController::class);
 Route::get('/products', [ProductController::class, 'getProducts']);
+Route::post('/productsByIds', [ProductController::class, 'getProductsByIds']);
 Route::get('/products/search={searchExp}', [ProductController::class, 'getProductsBySearch']);

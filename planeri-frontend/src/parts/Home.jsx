@@ -1,4 +1,20 @@
-export default function Home() {
+import { useEffect } from "react";
+
+export default function Home({ cartItems, setCartItems }) {
+  const getCartItems = () => {
+    var cItems = JSON.parse(localStorage.getItem("cart") || "[]");
+    const totalPrice = cItems.reduce(
+      (sum, item) => sum + parseInt(item.price),
+      0
+    );
+
+    setCartItems(cItems);
+  };
+
+  useEffect(() => {
+    getCartItems();
+  }, []);
+
   return (
     <div className="flex flex-col w-full h-fit justify-center items-center gap-y-20">
       <div className="flex flex-col pt-5">

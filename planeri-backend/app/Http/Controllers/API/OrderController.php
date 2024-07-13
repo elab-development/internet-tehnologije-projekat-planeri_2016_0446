@@ -23,6 +23,12 @@ class OrderController extends Controller
         return $orders;
     }
 
+    public function getOrderItems(string $id)
+    {
+        $orderItems = ListOfOrderItems::with(['planer.planerType', 'order'])->where('order_id', '=', (int)$id)->get();
+        return $orderItems;
+    }
+
     public function createOrder(Request $request)
     {
         $json = $request->json()->all();

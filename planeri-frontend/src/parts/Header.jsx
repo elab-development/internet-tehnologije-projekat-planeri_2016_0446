@@ -8,13 +8,14 @@ export default function Header({
   setShowLoginPopup,
   user,
   setUser,
+  cartItems,
+  setCartItems,
   setProductsByExp,
 }) {
   const navigate = useNavigate();
   const [selectedMenuItem, setSelectedMenuItem] = useState("");
   const [showCart, setShowCart] = useState(false);
   const [showPopupUser, setShowPopupUser] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
   const [searchExp, setSearchExp] = useState("");
   const [price, setPrice] = useState(0);
 
@@ -64,6 +65,7 @@ export default function Header({
       status: "Paid",
       orderItems: cartItems,
     };
+
     await createOrderRequest(orderRequest)
       .then(() => generatePdf())
       .then(() => setCartItems([]))
@@ -159,18 +161,18 @@ export default function Header({
                   </div>
 
                   <div className="flex flex-col w-full h-full gap-y-2 overflow-y-auto">
-                    {cartItems.map((cItem) => (
+                    {cartItems?.map((cItem) => (
                       <div className="flex flex-row w-full h-fit gap-x-5 justify-between items-center border border-gray-800 p-1">
                         <div className="flex w-10 h-10 justify-center items-center border border-gray-800">
                           <p>
-                            {cItem.planerType
-                              ? cItem.planerType.name[0]
-                              : cItem.name[0]}
+                            {cItem?.planerType
+                              ? cItem?.planerType?.name[0]
+                              : cItem?.name[0]}
                           </p>
                         </div>
                         <div className="flex flex-col">
                           <p>
-                            {cItem.planerType
+                            {cItem?.planerType
                               ? cItem.planerType.name
                               : cItem.name}
                           </p>

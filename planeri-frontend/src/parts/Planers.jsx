@@ -3,7 +3,7 @@ import { useProductsService } from "../service/useProductsService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Planers({ products, setProducts }) {
+export default function Planers({ products, setProducts, setCartItems }) {
   const { getProductsRequest } = useProductsService();
 
   const getProductsData = async () => {
@@ -14,14 +14,14 @@ export default function Planers({ products, setProducts }) {
     var array = JSON.parse(localStorage.getItem("cart") || "[]");
 
     const cartItem = {
-      id: array.length === 1 ? array.length : array.length + 1,
+      id: array.length + 1,
       productId: product.id,
       name: product.name,
       price: product.price,
     };
 
     array.push(cartItem);
-
+    setCartItems(array);
     localStorage.setItem("cart", JSON.stringify(array));
     toast(`${product.name} has been added to cart!`);
   };

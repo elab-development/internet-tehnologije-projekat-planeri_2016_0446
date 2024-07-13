@@ -19,7 +19,7 @@ class PlanerController extends Controller
         $json = $request->json()->all();
 
         try {
-            Planer::create([
+            $createdPlaner = Planer::create([
                 'planer_type_id' => $json['planer_type_id'],
                 'cover' => $json['cover_type'],
                 'cover_design' => $json['cover_design'],
@@ -33,7 +33,7 @@ class PlanerController extends Controller
                 'notes' => $json['notes'],
             ]);
 
-            return response()->json(['message' => 'Planer successfully created!']);
+            return response()->json(['message' => 'Planer successfully created!', 'createdPlaner' => $createdPlaner]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to create planer. Error: ' . $e->getMessage()], 500);
         }

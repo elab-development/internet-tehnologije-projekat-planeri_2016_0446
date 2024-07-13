@@ -11,7 +11,6 @@ export default function Step1({
   selectedPageNumber,
   handlePageNumberChange,
 }) {
-  useEffect(() => {}, [planerTypes]);
   return (
     <div className="flex flex-col w-full h-full justify-center items-center p-10 gap-y-5">
       <div className="flex flex-row w-full h-full justify-center items-start">

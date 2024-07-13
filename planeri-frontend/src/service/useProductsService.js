@@ -12,6 +12,20 @@ export const useProductsService = () => {
     }
   };
 
+  const getProductsByIdsRequest = async (productsIds) => {
+    try {
+      // Make a GET request using Axios
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/productsByIds",
+        productsIds
+      );
+      return response.data;
+    } catch (error) {
+      // Handle errors
+      console.log(error);
+    }
+  };
+
   const getProductsBySearchRequest = async (search) => {
     try {
       // Make a GET request using Axios
@@ -24,5 +38,9 @@ export const useProductsService = () => {
       console.log(error);
     }
   };
-  return { getProductsRequest, getProductsBySearchRequest };
+  return {
+    getProductsRequest,
+    getProductsByIdsRequest,
+    getProductsBySearchRequest,
+  };
 };

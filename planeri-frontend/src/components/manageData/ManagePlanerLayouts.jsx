@@ -132,7 +132,6 @@ export default function ManagePlanerLayouts() {
               <p>Tip planera</p>
               <select
                 onChange={(event) => {
-                  console.log("e", event);
                   setEditPlanerLayout({
                     ...editPlanerLayout,
                     planer_type_id: event.target.value,

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('cover')->require();
             $table->integer('page_number')->require();
             $table->boolean('has_calendar')->require();
-            $table->string('page_layout')->require();
+            $table->string('page_layout')->nullable();
             $table->float('price')->require();
             $table->timestamps();
         });

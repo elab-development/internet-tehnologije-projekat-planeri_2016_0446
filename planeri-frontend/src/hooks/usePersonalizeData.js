@@ -5,6 +5,9 @@ import Step3 from "../components/steps/Step3";
 import Step4 from "../components/steps/Step4";
 import { usePlanerTypesService } from "../service/usePlanerTypesService";
 import { usePlanersService } from "../service/usePlanersService";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router";
 
 export default function usePersonalizeData() {
   const [steps, setSteps] = useState([
@@ -13,6 +16,7 @@ export default function usePersonalizeData() {
     { id: 3, label: "", isActive: false, content: <></> },
     { id: 4, label: "", isActive: false, content: <></> },
   ]);
+  const navigate = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(steps[0]);
 
@@ -93,9 +97,8 @@ export default function usePersonalizeData() {
     const price = selectedPlanerType.price + selectedCoverType.price;
 
     const planer = {
-      id: array.length === 1 ? array.length : array.length + 1,
-      planerType: selectedPlanerType,
-      cover_type: selectedCoverType,
+      planer_type_id: selectedPlanerType?.id,
+      cover_type: selectedCoverType?.name,
       cover_design: selectedCoverDesign,
       size: selectedPlanerSize,
       front_page: selectedFrontPage,
@@ -106,13 +109,21 @@ export default function usePersonalizeData() {
       notes: selectedNoteType,
       price: price,
     };
-    console.log("p", planer);
-    // await createPlanerRequest(planer);
-    // localStorage.removeItem("cart");
+    await createPlanerRequest(planer, (value) => {
+      const cartItem = {
+        id: array.length + 1,
+        productId: value.id,
+        name: selectedPlanerType.name,
+        price: planer.price,
+      };
+      localStorage.removeItem("cart");
 
-    array.push(planer);
+      array.push(cartItem);
 
-    localStorage.setItem("cart", JSON.stringify(array));
+      localStorage.setItem("cart", JSON.stringify(array));
+      toast("Planer uspesno dodat u korpu!");
+      navigate("/");
+    });
   };
 
   //////////////////////////////////////////
@@ -154,6 +165,10 @@ export default function usePersonalizeData() {
   };
 
   useEffect(() => {
+    getPlanerTypesData();
+  }, []);
+
+  useEffect(() => {
     switch (currentStep.id) {
       case 1:
         setCurrentStep((prev) => {
@@ -165,6 +180,7 @@ export default function usePersonalizeData() {
                 nextStep={nextStep}
                 planerTypes={planerTypes}
                 selectedPlanerType={selectedPlanerType}
+                getPlanerTypesData={getPlanerTypesData}
                 handlePlanerTypeChange={handlePlanerTypeChange}
                 selectedPlanerSize={selectedPlanerSize}
                 handlePlanerSizeChange={handlePlanerSizeChange}
@@ -254,6 +270,7 @@ export default function usePersonalizeData() {
     }
   }, [
     currentStep.id,
+    planerTypes,
     selectedPlanerType,
     selectedPlanerSize,
     selectedCoverType,

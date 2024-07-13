@@ -16,6 +16,7 @@ class ProductSeeder extends Seeder
         Product::truncate();
 
         Product::create([
+            'id' => 99900,
             'name' => "Product 1",
             'size' => "A4",
             'price' => "1000",
@@ -23,6 +24,7 @@ class ProductSeeder extends Seeder
         ]);
 
         Product::create([
+            'id' => 99901,
             'name' => "Product 2",
             'size' => "A5",
             'price' => "1200",
@@ -30,6 +32,7 @@ class ProductSeeder extends Seeder
         ]);
 
         Product::create([
+            'id' => 99902,
             'name' => "Product 3",
             'size' => "A4",
             'price' => "900",
@@ -38,6 +41,7 @@ class ProductSeeder extends Seeder
 
 
         Product::create([
+            'id' => 99903,
             'name' => "Product 4",
             'size' => "A5",
             'price' => "2100",
