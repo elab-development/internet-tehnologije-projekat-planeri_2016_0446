@@ -23,7 +23,10 @@ export default function Step3({
           {selectedPlanerType?.name === "Studentski" && (
             <div className="flex flex-col w-full h-full justify-start items-start">
               <p className="text-2xl font-semibold">Izaberite raspored</p>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handlePlanerLayoutChange("StudentLayout1")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="planerLayout"
@@ -33,7 +36,10 @@ export default function Step3({
                 />
                 <p>Layout 1</p>
               </div>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handlePlanerLayoutChange("StudentLayout2")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="planerLayout"
@@ -43,7 +49,10 @@ export default function Step3({
                 />
                 <p>Layout 2</p>
               </div>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handlePlanerLayoutChange("StudentLayout3")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="planerLayout"
@@ -58,7 +67,10 @@ export default function Step3({
           {selectedPlanerType?.name === "Bullet" && (
             <div className="flex flex-col w-full h-full justify-start items-start">
               <p className="text-2xl font-semibold">Izaberite broj stranica</p>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handlePageNumberChange("90")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="pageNumber"
@@ -68,7 +80,10 @@ export default function Step3({
                 />
                 <p>90</p>
               </div>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handlePageNumberChange("140")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="pageNumber"
@@ -84,7 +99,10 @@ export default function Step3({
             <p className="text-2xl font-semibold">
               Da li zelite datumiran planer?
             </p>
-            <div className="flex text-xl gap-x-5">
+            <div
+              onClick={(e) => setShowDatePicker(true)}
+              className="flex text-xl gap-x-5"
+            >
               <input
                 type="radio"
                 name="dateChoose"
@@ -93,7 +111,10 @@ export default function Step3({
               />
               <p>Da</p>
             </div>
-            <div className="flex text-xl gap-x-5">
+            <div
+              onClick={(e) => setShowDatePicker(false)}
+              className="flex text-xl gap-x-5"
+            >
               <input
                 type="radio"
                 name="dateChoose"
@@ -124,32 +145,41 @@ export default function Step3({
           {selectedPlanerType?.name === "Dnevni" && (
             <div className="flex flex-col w-full h-full justify-start items-start">
               <p className="text-2xl font-semibold">Vrsta dnevnog rasporeda</p>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handleDailyPlanerTypeChange("Horizontalni")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="dailyPlanerType"
                   value="Horizontalni"
-                  onChange={(e) => handleDailyPlanerTypeChange(e)}
+                  onChange={(e) => handleDailyPlanerTypeChange(e.target.value)}
                   checked={selectedDailyPlanerType === "Horizontalni"}
                 />
                 <p>Horizontalno</p>
               </div>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handleDailyPlanerTypeChange("Vertikalni")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="dailyPlanerType"
                   value="Vertikalni"
-                  onChange={(e) => handleDailyPlanerTypeChange(e)}
+                  onChange={(e) => handleDailyPlanerTypeChange(e.target.value)}
                   checked={selectedDailyPlanerType === "Vertikalni"}
                 />
                 <p>Vertikalno</p>
               </div>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handleDailyPlanerTypeChange("Kvadrati")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="dailyPlanerType"
                   value="Kvadrati"
-                  onChange={(e) => handleDailyPlanerTypeChange(e)}
+                  onChange={(e) => handleDailyPlanerTypeChange(e.target.value)}
                   checked={selectedDailyPlanerType === "Kvadrati"}
                 />
                 <p>Kvadrati</p>

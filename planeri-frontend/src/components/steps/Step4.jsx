@@ -19,7 +19,10 @@ export default function Step4({
               <p className="text-2xl font-semibold">
                 Izaberite izgled stranica
               </p>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handlePageLayoutChange("Tackice")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="pageLayout"
@@ -29,7 +32,10 @@ export default function Step4({
                 />
                 <p>Tackice</p>
               </div>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handlePageLayoutChange("Linije")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="pageLayout"
@@ -39,7 +45,10 @@ export default function Step4({
                 />
                 <p>Linije</p>
               </div>
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => handlePageLayoutChange("Kvadratici")}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="pageLayout"
@@ -54,7 +63,10 @@ export default function Step4({
             <>
               <div className="flex flex-col w-full h-full justify-start items-start">
                 <p className="text-2xl font-semibold">Da li ima beleske?</p>
-                <div className="flex text-xl gap-x-5">
+                <div
+                  onClick={(e) => setShowNotes(true)}
+                  className="flex text-xl gap-x-5"
+                >
                   <input
                     type="radio"
                     name="hasNotes"
@@ -63,7 +75,10 @@ export default function Step4({
                   />
                   <p>Ima</p>
                 </div>
-                <div className="flex text-xl gap-x-5">
+                <div
+                  onClick={(e) => setShowNotes(false)}
+                  className="flex text-xl gap-x-5"
+                >
                   <input
                     type="radio"
                     name="hasNotes"
@@ -78,32 +93,41 @@ export default function Step4({
                   <p className="text-2xl font-semibold">
                     Izaberite vrstu beleski
                   </p>
-                  <div className="flex text-xl gap-x-5">
+                  <div
+                    onClick={(e) => handleNoteTypeChange("Tackice")}
+                    className="flex text-xl gap-x-5"
+                  >
                     <input
                       type="radio"
                       name="notesLayout"
                       value="Tackice"
-                      onChange={(e) => handleNoteTypeChange(e)}
+                      onChange={(e) => handleNoteTypeChange(e.target.value)}
                       checked={selectedNoteType === "Tackice"}
                     />
                     <p>Tackice</p>
                   </div>
-                  <div className="flex text-xl gap-x-5">
+                  <div
+                    onClick={(e) => handleNoteTypeChange("Linije")}
+                    className="flex text-xl gap-x-5"
+                  >
                     <input
                       type="radio"
                       name="notesLayout"
                       value="Linije"
-                      onChange={(e) => handleNoteTypeChange(e)}
+                      onChange={(e) => handleNoteTypeChange(e.target.value)}
                       checked={selectedNoteType === "Linije"}
                     />
                     <p>Linije</p>
                   </div>
-                  <div className="flex text-xl gap-x-5">
+                  <div
+                    onClick={(e) => handleNoteTypeChange("Kvadratici")}
+                    className="flex text-xl gap-x-5"
+                  >
                     <input
                       type="radio"
                       name="notesLayout"
                       value="Kvadratici"
-                      onChange={(e) => handleNoteTypeChange(e)}
+                      onChange={(e) => handleNoteTypeChange(e.target.value)}
                       checked={selectedNoteType === "Kvadratici"}
                     />
                     <p>Kvadratici</p>

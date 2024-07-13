@@ -32,8 +32,8 @@ export default function usePersonalizeData() {
     setSelectedPlanerType(pType);
   };
 
-  const handlePlanerSizeChange = (event) => {
-    setSelectedPlanerSize(event.target.value);
+  const handlePlanerSizeChange = (value) => {
+    setSelectedPlanerSize(value);
   };
 
   const getPlanerTypesData = async () => {
@@ -49,12 +49,12 @@ export default function usePersonalizeData() {
     setSelectedCoverType(cover);
   };
 
-  const handleCoverDesignChange = (event) => {
-    setSelectedCoverDesign(event.target.value);
+  const handleCoverDesignChange = (value) => {
+    setSelectedCoverDesign(value);
   };
 
-  const handleFrontPageChange = (event) => {
-    setSelectedFrontPage(event.target.value);
+  const handleFrontPageChange = (value) => {
+    setSelectedFrontPage(value);
   };
   //Step 3
   const [showDatePicker, setShowDatePicker] = useState(null);
@@ -67,28 +67,28 @@ export default function usePersonalizeData() {
     setSelectedDate(event.target.value);
   };
 
-  const handlePlanerLayoutChange = (event) => {
-    setSelectedPlanerLayout(event.target.value);
+  const handlePlanerLayoutChange = (value) => {
+    setSelectedPlanerLayout(value);
   };
 
-  const handlePageNumberChange = (event) => {
-    setSelectedPageNumber(event.target.value);
+  const handlePageNumberChange = (value) => {
+    setSelectedPageNumber(value);
   };
 
-  const handleDailyPlanerTypeChange = (event) => {
-    setSelectedDailyPlanerType(event.target.value);
+  const handleDailyPlanerTypeChange = (value) => {
+    setSelectedDailyPlanerType(value);
   };
   //Step 4
   const [showNotes, setShowNotes] = useState(null);
   const [selectedNoteType, setSelectedNoteType] = useState(null);
   const [selectedPageLayout, setSelectedPageLayout] = useState(null);
 
-  const handleNoteTypeChange = (event) => {
-    setSelectedNoteType(event.target.value);
+  const handleNoteTypeChange = (value) => {
+    setSelectedNoteType(value);
   };
 
-  const handlePageLayoutChange = (event) => {
-    setSelectedPageLayout(event.target.value);
+  const handlePageLayoutChange = (value) => {
+    setSelectedPageLayout(value);
   };
 
   const finishCustomization = async () => {

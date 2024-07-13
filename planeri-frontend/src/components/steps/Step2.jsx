@@ -39,13 +39,16 @@ export default function Step2({
           <div className="flex flex-col w-full h-full justify-start items-start">
             <p className="text-2xl font-semibold">Izaberite vrstu poveza</p>
             {covers.map((cover) => (
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={() => handleCoverTypeChange(cover)}
+                className="flex text-xl gap-x-5"
+              >
                 <>
                   <input
                     type="radio"
                     name="coverType"
                     value={cover.name}
-                    onChange={() => handleCoverTypeChange(cover)}
+                    onChange={(e) => handleCoverTypeChange(cover)}
                     checked={selectedCoverType?.name === cover.name}
                   />
                   <p>
@@ -58,15 +61,18 @@ export default function Step2({
           <div className="flex flex-col w-full h-full justify-start items-start">
             <p className="text-2xl font-semibold">Izaberite dizajn korice</p>
             {coverDesigns.map((coverDesign) => (
-              <div className="flex text-xl gap-x-5">
+              <div
+                onClick={(e) => {
+                  showImage(coverDesign.id);
+                  handleCoverDesignChange(coverDesign.name);
+                }}
+                className="flex text-xl gap-x-5"
+              >
                 <input
                   type="radio"
                   name="coverDesign"
                   value={coverDesign.name}
-                  onChange={(e) => {
-                    showImage(coverDesign.id);
-                    handleCoverDesignChange(e);
-                  }}
+                  onChange={(e) => handleCoverDesignChange(e.target.value)}
                   checked={selectedCoverDesign === coverDesign.name}
                 />
                 <p>{coverDesign.name}</p>
@@ -77,22 +83,28 @@ export default function Step2({
             <p className="text-2xl font-semibold">
               Da li zelite naslovnu stranu?
             </p>
-            <div className="flex text-xl gap-x-5">
+            <div
+              onClick={(e) => handleFrontPageChange("true")}
+              className="flex text-xl gap-x-5"
+            >
               <input
                 type="radio"
                 name="frontPage"
                 value={true}
-                onChange={(e) => handleFrontPageChange(e)}
+                onChange={(e) => handleFrontPageChange(e.target.value)}
                 checked={selectedFrontPage === "true"}
               />
               <p>Da</p>
             </div>
-            <div className="flex text-xl gap-x-5">
+            <div
+              onClick={(e) => handleFrontPageChange("false")}
+              className="flex text-xl gap-x-5"
+            >
               <input
                 type="radio"
                 name="frontPage"
                 value={false}
-                onChange={(e) => handleFrontPageChange(e)}
+                onChange={(e) => handleFrontPageChange(e.target.value)}
                 checked={selectedFrontPage === "false"}
               />
               <p>Ne</p>
