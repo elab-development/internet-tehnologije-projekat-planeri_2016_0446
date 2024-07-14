@@ -32,7 +32,6 @@ class OrderController extends Controller
     public function createOrder(Request $request)
     {
         $json = $request->json()->all();
-        Log::info('eadsaf', $json);
         try {
             $order = Order::create([
                 'user_id' => $json['user_id'],
@@ -41,10 +40,7 @@ class OrderController extends Controller
             ]);
 
             $orderId = $order->id;
-            $listOfItems = $json['orderItems'];
-            Log::info('itemcici', $listOfItems);
             foreach ($json['orderItems'] as $item) {
-                Log::info('itemce', $item);
 
                 $this->addItemToOrderList($orderId, $item['productId']);
             }

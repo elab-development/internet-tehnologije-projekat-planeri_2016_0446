@@ -3,6 +3,7 @@ import { FaSearch, FaShoppingCart, FaTrash, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useProductsService } from "../service/useProductsService";
 import { useOrdersService } from "../service/useOrdersService";
+import { useAuthService } from "../service/useAuthService";
 
 export default function Header({
   setShowLoginPopup,
@@ -19,6 +20,7 @@ export default function Header({
   const [searchExp, setSearchExp] = useState("");
   const [price, setPrice] = useState(0);
 
+  const { registerRequest } = useAuthService();
   const { getProductsBySearchRequest } = useProductsService();
   const { createOrderRequest, generatePdfRequest } = useOrdersService();
 
@@ -59,8 +61,23 @@ export default function Header({
   };
 
   const createOrder = async () => {
+    let id = 0;
+    if (user == null) {
+      let randomId = Math.floor(Math.random() * 100000);
+      await registerRequest(
+        {
+          name: "anonymous" + randomId,
+          email: "anonymous" + randomId + "@mail.com",
+          password: "anonymous123",
+        },
+        (value) => {
+          id = value.id;
+        }
+      );
+    }
+
     let orderRequest = {
-      user_id: user.id,
+      user_id: user === null ? id : user.id,
       price: price,
       status: "Paid",
       orderItems: cartItems,
@@ -136,6 +153,8 @@ export default function Header({
                       localStorage.removeItem("userInfo");
                       setUser(null);
                       alert("Uspesno ste se izlogovali!");
+                      navigate("/");
+                      setSelectedMenuItem("");
                     }}
                   >
                     Odjavi se
@@ -240,19 +259,19 @@ export default function Header({
         >
           O planerima
         </p>
-        {/* {user.role_id === 1 && ( */}
-        <p
-          className={`cursor-pointer hover:bg-orange-400 ${
-            selectedMenuItem === "Manage" && "bg-orange-400"
-          } p-1 rounded-lg`}
-          onClick={() => {
-            setSelectedMenuItem("Manage");
-            navigate("/manage");
-          }}
-        >
-          Upravljanje podacima
-        </p>
-        {/* )} */}
+        {user?.role_id === 1 && (
+          <p
+            className={`cursor-pointer hover:bg-orange-400 ${
+              selectedMenuItem === "Manage" && "bg-orange-400"
+            } p-1 rounded-lg`}
+            onClick={() => {
+              setSelectedMenuItem("Manage");
+              navigate("/manage");
+            }}
+          >
+            Upravljanje podacima
+          </p>
+        )}
         <p
           className={`cursor-pointer hover:bg-orange-400 ${
             selectedMenuItem === "Contact" && "bg-orange-400"

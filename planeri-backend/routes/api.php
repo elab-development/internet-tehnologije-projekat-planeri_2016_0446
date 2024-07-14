@@ -29,13 +29,13 @@ Route::delete('/removeAccount', [AuthController::class, 'removeAccount']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/orders', [OrderController::class, 'getOrders']);
-    Route::post('/orders', [OrderController::class, 'createOrder']);
     Route::put('/orders/{id}', [OrderController::class, 'updateOrder']);
     Route::delete('/orders/{id}', [OrderController::class, 'deleteOrder']);
     Route::get('/orders/{id}/orderItems', [OrderController::class, 'getOrderItems']);
 });
 
 Route::post('/generate-pdf', [OrderController::class, 'generateBillToPdf']);
+Route::post('/orders', [OrderController::class, 'createOrder']);
 Route::get('/orders/{id}', [OrderController::class, 'getOrdersForUser']);
 
 Route::get('/planerTypes/search={searchExp}', [PlanerTypeController::class, 'getPlanerTypesBySearch']);
