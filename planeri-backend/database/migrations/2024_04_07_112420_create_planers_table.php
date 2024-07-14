@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('planers', function (Blueprint $table) {
             $table->id();
-            $table->integer('planer_type_id')->require();
+            $table->unsignedBigInteger('planer_type_id')->require();
             $table->string('cover')->require();
             $table->integer('page_number')->require();
             $table->boolean('has_calendar')->require();

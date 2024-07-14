@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PlanerTypeSeeder::class,
             PlanerLayoutSeeder::class,
-            RoleSeeder::class,
             UserSeeder::class,
+            RoleSeeder::class,
             ProductSeeder::class
         ]);
     }

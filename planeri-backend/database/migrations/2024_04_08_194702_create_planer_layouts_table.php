@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->require();
             $table->string('image')->nullable();
             $table->string('price')->require();
-            $table->integer('planer_type_id')->require();
+            $table->unsignedBigInteger('planer_type_id')->require();
             $table->timestamps();
         });
     }
