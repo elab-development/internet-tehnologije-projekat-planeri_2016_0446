@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePlanerTypesService } from "../../service/usePlanerTypesService";
+import TextField from "../reusable/TextField";
+import Button from "../reusable/Button";
 
 export default function ManagePlanerTypes() {
   const [editPlanerType, setEditPlanerType] = useState(null);
@@ -83,53 +85,44 @@ export default function ManagePlanerTypes() {
       <div className="flex flex-row w-full h-full justify-center items-center gap-x-5">
         <div className="flex flex-row w-2/3 h-full gap-x-5">
           <div className="flex flex-col w-full gap-y-5">
-            <div className="flex flex-col justify-start items-start">
-              <p>Naziv</p>
-              <input
-                onChange={(event) => {
-                  setEditPlanerType({
-                    ...editPlanerType,
-                    name: event.target.value,
-                  });
-                }}
-                value={editPlanerType?.name}
-                className="w-full"
-              />
-            </div>
-            <div className="flex flex-col justify-start items-start">
-              <p>Cena</p>
-              <input
-                onChange={(event) => {
-                  setEditPlanerType({
-                    ...editPlanerType,
-                    price: event.target.value,
-                  });
-                }}
-                value={editPlanerType?.price}
-                className="w-full"
-              />
-            </div>
+            <TextField
+              value={editPlanerType?.name}
+              setValue={(value) =>
+                setEditPlanerType({
+                  ...editPlanerType,
+                  name: value,
+                })
+              }
+              placeholder={"Naziv"}
+            />
+            <TextField
+              value={editPlanerType?.price}
+              setValue={(value) =>
+                setEditPlanerType({
+                  ...editPlanerType,
+                  price: value,
+                })
+              }
+              placeholder={"Cena"}
+            />
           </div>
         </div>
         <div className="flex flex-col w-1/3 h-full gap-y-5">
-          <div
-            onClick={() => createPlanerType()}
-            className="flex w-full h-10 justify-center items-center bg-orange-400 rounded-lg font-bold text-lg cursor-pointer"
-          >
-            Dodaj
-          </div>
-          <div
-            onClick={() => updatePlanerType()}
-            className="flex w-full h-10 justify-center items-center bg-blue-600 rounded-lg font-bold text-lg"
-          >
-            Izmeni
-          </div>
-          <div
-            onClick={() => deletePlanerType()}
-            className="flex w-full h-10 justify-center items-center bg-red-600 rounded-lg font-bold text-lg"
-          >
-            Obrisi
-          </div>
+          <Button
+            text={"Dodaj"}
+            handleClick={() => createPlanerType()}
+            width={"w-full"}
+          />
+          <Button
+            text={"Izmeni"}
+            handleClick={() => updatePlanerType()}
+            width={"w-full"}
+          />
+          <Button
+            text={"Obrisi"}
+            handleClick={() => deletePlanerType()}
+            width={"w-full"}
+          />
         </div>
       </div>
     </div>

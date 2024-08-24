@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useUsersService } from "../../service/useUsersService";
 import { useAuthService } from "../../service/useAuthService";
+import TextField from "../reusable/TextField";
+import SelectField from "../reusable/SelectField";
+import Button from "../reusable/Button";
 
 export default function ManageUsers() {
   const [editUser, setEditUser] = useState(null);
@@ -69,7 +72,8 @@ export default function ManageUsers() {
         <div className="flex flex-row w-full border pl-2 pr-4">
           <div className="flex w-[10%]">ID</div>
           <div className="flex w-[15%]">Ime</div>
-          <div className="flex w-[15%]">Email</div>
+          <div className="flex w-[25%]">Email</div>
+          <div className="flex w-[15%]">Role</div>
         </div>
         <div className="flex flex-col w-full h-[200px] overflow-y-scroll">
           {users.map((user) => (
@@ -81,7 +85,8 @@ export default function ManageUsers() {
             >
               <div className="flex w-[10%]">{user.id}</div>
               <div className="flex w-[15%]">{user.name}</div>
-              <div className="flex w-[15%]">{user.email}</div>
+              <div className="flex w-[25%]">{user.email}</div>
+              <div className="flex w-[15%]">{user?.role.name}</div>
             </div>
           ))}
         </div>
@@ -89,83 +94,65 @@ export default function ManageUsers() {
       <div className="flex flex-row w-full h-full justify-center items-center gap-x-5">
         <div className="flex flex-row w-2/3 h-full gap-x-5">
           <div className="flex flex-col w-full gap-y-5">
-            <div className="flex flex-col justify-start items-start">
-              <p>Ime</p>
-              <input
-                onChange={(event) => {
-                  setEditUser({
-                    ...editUser,
-                    name: event.target.value,
-                  });
-                }}
-                value={editUser?.name}
-                className="w-full"
-              />
-            </div>
-            <div className="flex flex-col justify-start items-start">
-              <p>Email</p>
-              <input
-                onChange={(event) => {
-                  setEditUser({
-                    ...editUser,
-                    email: event.target.value,
-                  });
-                }}
-                value={editUser?.email}
-                className="w-full"
-              />
-            </div>
-            <div className="flex flex-col justify-start items-start">
-              <p>Lozinka</p>
-              <input
-                onChange={(event) => {
-                  setEditUser({
-                    ...editUser,
-                    password: event.target.value,
-                  });
-                }}
-                value={editUser?.password}
-                className="w-full"
-              />
-            </div>
-            <div className="flex flex-col justify-start items-start">
-              <p>Uloga</p>
-              <select
-                onChange={(event) => {
-                  setEditUser({
-                    ...editUser,
-                    role: event.target.value,
-                  });
-                }}
-                value={editUser?.role?.name}
-                className="w-full"
-              >
-                {roles.map((role) => (
-                  <option>{role.name}</option>
-                ))}
-              </select>
-            </div>
+            <TextField
+              value={editUser?.name}
+              setValue={(value) =>
+                setEditUser({
+                  ...editUser,
+                  name: value,
+                })
+              }
+              placeholder={"Ime"}
+            />
+            <TextField
+              value={editUser?.email}
+              setValue={(value) =>
+                setEditUser({
+                  ...editUser,
+                  email: value,
+                })
+              }
+              placeholder={"Email"}
+            />
+            <TextField
+              value={editUser?.password}
+              setValue={(value) =>
+                setEditUser({
+                  ...editUser,
+                  password: value,
+                })
+              }
+              placeholder={"Lozinka"}
+            />
+            <SelectField
+              value={editUser?.role?.name}
+              setValue={(value) =>
+                setEditUser({
+                  ...editUser,
+                  role: value,
+                })
+              }
+              placeholder={"Uloga"}
+              options={roles}
+            />
           </div>
         </div>
         <div className="flex flex-col w-1/3 h-full gap-y-5">
-          <div
-            onClick={() => createUser()}
-            className="flex w-full h-10 justify-center items-center bg-orange-400 rounded-lg font-bold text-lg cursor-pointer"
-          >
-            Dodaj
-          </div>
-          <div
-            onClick={() => updateUser()}
-            className="flex w-full h-10 justify-center items-center bg-blue-600 rounded-lg font-bold text-lg"
-          >
-            Izmeni
-          </div>
-          <div
-            onClick={() => deleteUser()}
-            className="flex w-full h-10 justify-center items-center bg-red-600 rounded-lg font-bold text-lg"
-          >
-            Obrisi
-          </div>
+          <Button
+            text={"Dodaj"}
+            handleClick={() => createUser()}
+            width={"w-full"}
+          />
+          <Button
+            text={"Izmeni"}
+            handleClick={() => updateUser()}
+            width={"w-full"}
+          />
+          <Button
+            text={"Obrisi"}
+            handleClick={() => deleteUser()}
+            width={"w-full"}
+          />
         </div>
       </div>
     </div>

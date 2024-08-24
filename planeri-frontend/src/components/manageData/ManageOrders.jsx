@@ -3,15 +3,18 @@ import { useOrdersService } from "../../service/useOrdersService";
 import PreviewOrderItems from "./PreviewOrderItems";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TextField from "../reusable/TextField";
+import SelectField from "../reusable/SelectField";
+import Button from "../reusable/Button";
 
 export default function ManageOrders() {
   const [editOrder, setEditOrder] = useState(null);
   const [orders, setOrders] = useState([]);
   const [showOrderItems, setShowOrderItems] = useState(false);
   const [statuses, setStatuses] = useState([
-    "Pending",
-    "In Progress",
-    "Completed",
+    { name: "Pending" },
+    { name: "In Progress" },
+    { name: "Completed" },
   ]);
 
   const { getOrdersRequest, updateOrderRequest, deleteOrderRequest } =
@@ -55,7 +58,7 @@ export default function ManageOrders() {
           <div className="flex flex-col w-full h-full bg-[#FFFBEC]">
             <div className="flex flex-row w-full border pl-2 pr-4">
               <div className="flex w-[10%]">ID</div>
-              <div className="flex w-[15%]">Korisnik</div>
+              <div className="flex w-[25%]">Korisnik</div>
               <div className="flex w-[15%]">Cena</div>
               <div className="flex w-[15%]">Status</div>
             </div>
@@ -68,7 +71,7 @@ export default function ManageOrders() {
                   }`}
                 >
                   <div className="flex w-[10%]">{order.id}</div>
-                  <div className="flex w-[15%]">{order.user.email}</div>
+                  <div className="flex w-[25%]">{order?.user?.email}</div>
                   <div className="flex w-[15%]">{order.price}</div>
                   <div className="flex w-[15%]">{order.status}</div>
                 </div>
@@ -78,61 +81,49 @@ export default function ManageOrders() {
           <div className="flex flex-row w-full h-full justify-center items-center gap-x-5">
             <div className="flex flex-row w-2/3 h-full gap-x-5">
               <div className="flex flex-col w-full gap-y-5">
-                <div className="flex flex-col justify-start items-start">
-                  <p>Cena</p>
-                  <input
-                    onChange={(event) => {
-                      setEditOrder({
-                        ...editOrder,
-                        price: event.target.value,
-                      });
-                    }}
-                    value={editOrder?.price}
-                    className="w-full"
-                  />
-                </div>
-                <div className="flex flex-col justify-start items-start">
-                  <p>Status</p>
-                  <select
-                    onChange={(event) => {
-                      setEditOrder({
-                        ...editOrder,
-                        status: event.target.value,
-                      });
-                    }}
-                    value={editOrder?.status}
-                    className="w-full"
-                  >
-                    {statuses.map((stat) => (
-                      <option>{stat}</option>
-                    ))}
-                  </select>
-                </div>
+                <TextField
+                  value={editOrder?.price}
+                  setValue={(value) =>
+                    setEditOrder({
+                      ...editOrder,
+                      price: value,
+                    })
+                  }
+                  placeholder={"Price"}
+                />
+                <SelectField
+                  value={editOrder?.status}
+                  setValue={(value) =>
+                    setEditOrder({
+                      ...editOrder,
+                      status: value,
+                    })
+                  }
+                  placeholder={"Status"}
+                  options={statuses}
+                />
               </div>
             </div>
             <div className="flex flex-col w-1/3 h-full gap-y-5">
-              <div
-                onClick={() =>
+              <Button
+                text={"Pregled"}
+                handleClick={() =>
                   editOrder !== null
                     ? setShowOrderItems(!showOrderItems)
                     : toast(`Odaberite neku porudzbinu za pregled!`)
                 }
-                className="flex w-full h-10 justify-center items-center bg-green-600 rounded-lg font-bold text-lg"
-              >
-                Pregled
-              </div>
-              <div
-                onClick={() => updateOrder()}
-                className="flex w-full h-10 justify-center items-center bg-blue-600 rounded-lg font-bold text-lg"
-              >
-                Izmeni
-              </div>
-              <div
-                onClick={() => deleteOrder()}
-                className="flex w-full h-10 justify-center items-center bg-red-600 rounded-lg font-bold text-lg"
-              >
-                Obrisi
-              </div>
+                width={"w-full"}
+              />
+              <Button
+                text={"Izmeni"}
+                handleClick={() => updateOrder()}
+                width={"w-full"}
+              />
+              <Button
+                text={"Obrisi"}
+                handleClick={() => deleteOrder()}
+                width={"w-full"}
+              />
             </div>
           </div>
         </>

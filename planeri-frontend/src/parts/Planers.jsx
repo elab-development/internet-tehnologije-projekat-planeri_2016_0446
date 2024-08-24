@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useProductsService } from "../service/useProductsService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PlanerCard from "../components/reusable/PlanerCard";
 
 export default function Planers({ products, setProducts, setCartItems }) {
   const { getProductsRequest } = useProductsService();
@@ -35,22 +36,11 @@ export default function Planers({ products, setProducts, setCartItems }) {
     <div className="flex flex-col h-[560px] w-full overflow-y-auto px-20">
       <div className="flex flex-wrap w-full h-full justify-center items-center  gap-x-2 gap-y-2">
         {products?.map((prod) => (
-          <div className="flex flex-col justify-around items-center float-left bg-[#FFECA1] w-[20%] h-[350px] rounded-xl">
-            <div className="flex flex-col w-28 h-28 border border-black justify-center items-center">
-              {prod.name[0] + prod.name[prod.name.length - 1]}
-            </div>
-            <p>{prod.name}</p>
-            <div className="flex flex-col w-full justify-center">
-              <p>{prod.size}</p>
-              <p>{prod.price}</p>
-            </div>
-            <div
-              className="flex flex-col w-[80%] h-fit p-2 bg-orange-400 text-white font-semibold justify-center items-center cursor-pointer rounded-xl"
-              onClick={() => addToCart(prod)}
-            >
-              Add to cart
-            </div>
-          </div>
+          <PlanerCard
+            product={prod}
+            text={"Dodaj u korpu"}
+            handleClick={addToCart}
+          />
         ))}
       </div>
     </div>

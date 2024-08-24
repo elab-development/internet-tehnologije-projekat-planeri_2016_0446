@@ -10,25 +10,48 @@ import {
   sizes,
 } from "../../data/stepsData";
 import { usePlanersService } from "../../service/usePlanersService";
+import SelectField from "../reusable/SelectField";
+import Button from "../reusable/Button";
 
 export default function ManagePlaners() {
   const [editPlaner, setEditPlaner] = useState(null);
   const [planers, setPlaners] = useState([]);
 
-  const { getPlanersRequest, createPlanerRequest } = usePlanersService();
+  const { getPlanersRequest, createPlanerRequest, deletePlanerRequest } =
+    usePlanersService();
 
   const getPlanersData = async () => {
     await getPlanersRequest().then((result) => setPlaners(result));
   };
 
   const createPlaner = async () => {
-    await createPlanerRequest(editPlaner)
+    const planerRequest = {
+      planer_type_id: parseInt(editPlaner?.planerType),
+      cover_type: editPlaner.cover,
+      cover_design: editPlaner.coverDesign,
+      page_number: editPlaner.pageNumber,
+      page_layout: null,
+      price: 1500,
+      size: editPlaner.size,
+      front_page: null,
+      dates: editPlaner.date,
+      daily_planer_design: null,
+      notes: editPlaner.note,
+    };
+    await createPlanerRequest(planerRequest)
       .then(getPlanersData())
       .finally(
         alert(
           `Planer successfully created: ${editPlaner.cover}, ${editPlaner.coverDesign}`
         )
       );
+  };
+
+  const deletePlaner = async () => {
+    await deletePlanerRequest(editPlaner.id)
+      .then(alert(`Planer successfully deleted!`))
+      .then(getPlanersData())
+      .finally(setEditPlaner({}));
   };
 
   const selectPlaner = (planer) => {
@@ -77,57 +100,39 @@ export default function ManagePlaners() {
       <div className="flex flex-row w-full h-full justify-center items-center gap-x-5">
         <div className="flex flex-row w-2/3 h-full gap-x-5">
           <div className="flex flex-col w-full gap-y-5">
-            <div className="flex flex-col justify-start items-start">
-              <p>Korice</p>
-              <select
-                onChange={(event) => {
-                  setEditPlaner({
-                    ...editPlaner,
-                    cover: event.target.value,
-                  });
-                }}
-                value={editPlaner?.cover}
-                className="w-full"
-              >
-                {covers.map((cover) => (
-                  <option>{cover.name}</option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-col justify-start items-start">
-              <p>Dizajn korice</p>
-              <select
-                onChange={(event) => {
-                  setEditPlaner({
-                    ...editPlaner,
-                    cover: event.target.value,
-                  });
-                }}
-                value={editPlaner?.coverDesign}
-                className="w-full"
-              >
-                {coverDesigns.map((coverDesign) => (
-                  <option>{coverDesign.name}</option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-col justify-start items-start">
-              <p>Velicina</p>
-              <select
-                onChange={(event) => {
-                  setEditPlaner({
-                    ...editPlaner,
-                    size: event.target.value,
-                  });
-                }}
-                value={editPlaner?.size}
-                className="w-full"
-              >
-                {sizes.map((size) => (
-                  <option>{size}</option>
-                ))}
-              </select>
-            </div>
+            <SelectField
+              value={editPlaner?.cover}
+              setValue={(value) =>
+                setEditPlaner({
+                  ...editPlaner,
+                  cover: value,
+                })
+              }
+              placeholder={"Korice"}
+              options={covers}
+            />
+            <SelectField
+              value={editPlaner?.coverDesign}
+              setValue={(value) =>
+                setEditPlaner({
+                  ...editPlaner,
+                  coverDesign: value,
+                })
+              }
+              placeholder={"Dizajn korice"}
+              options={coverDesigns}
+            />
+            <SelectField
+              value={editPlaner?.size}
+              setValue={(value) =>
+                setEditPlaner({
+                  ...editPlaner,
+                  size: value,
+                })
+              }
+              placeholder={"Velicina"}
+              options={sizes}
+            />
             <div className="flex flex-col justify-start items-start">
               <p>Tip planera</p>
               <select
@@ -141,95 +146,69 @@ export default function ManagePlaners() {
                 className="w-full"
               >
                 {planerTypes.map((planerType) => (
-                  <option>{planerType.name}</option>
+                  <option value={planerType.id}>{planerType.name}</option>
                 ))}
               </select>
             </div>
           </div>
           <div className="flex flex-col w-full gap-y-5">
-            <div className="flex flex-col justify-start items-start">
-              <p>Raspored planera</p>
-              <select
-                onChange={(event) => {
-                  setEditPlaner({
-                    ...editPlaner,
-                    planerTypeLayout: event.target.value,
-                  });
-                }}
-                value={editPlaner?.planerTypeLayout}
-                className="w-full"
-              >
-                {planerLayouts.map((planerLayout) => (
-                  <option>{planerLayout.name}</option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-col justify-start items-start">
-              <p>Datumi</p>
-              <select
-                onChange={(event) => {
-                  setEditPlaner({
-                    ...editPlaner,
-                    date: event.target.value,
-                  });
-                }}
-                value={editPlaner?.dates}
-                className="w-full"
-              >
-                {dates.map((date) => (
-                  <option>{date}</option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-col justify-start items-start">
-              <p>Beleske</p>
-              <select
-                onChange={(event) => {
-                  setEditPlaner({
-                    ...editPlaner,
-                    note: event.target.value,
-                  });
-                }}
-                value={editPlaner?.note}
-                className="w-full"
-              >
-                {notes.map((note) => (
-                  <option>{note}</option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-col justify-start items-start">
-              <p>Broj strana</p>
-              <select
-                onChange={(event) => {
-                  setEditPlaner({
-                    ...editPlaner,
-                    pageNumber: event.target.value,
-                  });
-                }}
-                value={editPlaner?.pageNumber}
-                className="w-full"
-              >
-                {pageNumbers.map((pageNumber) => (
-                  <option>{pageNumber}</option>
-                ))}
-              </select>
-            </div>
+            <SelectField
+              value={editPlaner?.planerTypeLayout}
+              setValue={(value) =>
+                setEditPlaner({
+                  ...editPlaner,
+                  planerTypeLayout: value,
+                })
+              }
+              placeholder={"Raspored planera"}
+              options={planerLayouts}
+            />
+            <SelectField
+              value={editPlaner?.dates}
+              setValue={(value) =>
+                setEditPlaner({
+                  ...editPlaner,
+                  date: value,
+                })
+              }
+              placeholder={"Datumi"}
+              options={dates}
+            />
+            <SelectField
+              value={editPlaner?.note}
+              setValue={(value) =>
+                setEditPlaner({
+                  ...editPlaner,
+                  note: value,
+                })
+              }
+              placeholder={"Beleske"}
+              options={notes}
+            />
+            <SelectField
+              value={editPlaner?.pageNumber}
+              setValue={(value) =>
+                setEditPlaner({
+                  ...editPlaner,
+                  pageNumber: value,
+                })
+              }
+              placeholder={"Broj strana"}
+              options={pageNumbers}
+            />
           </div>
         </div>
         <div className="flex flex-col w-1/3 h-full gap-y-5">
-          <div
-            onClick={() => createPlaner()}
-            className="flex w-full h-10 justify-center items-center bg-orange-400 rounded-lg font-bold text-lg cursor-pointer"
-          >
-            Dodaj
-          </div>
-          <div className="flex w-full h-10 justify-center items-center bg-blue-600 rounded-lg font-bold text-lg">
-            Izmeni
-          </div>
-          <div className="flex w-full h-10 justify-center items-center bg-red-600 rounded-lg font-bold text-lg">
-            Obrisi
-          </div>
+          <Button
+            text={"Dodaj"}
+            handleClick={() => createPlaner()}
+            width={"w-full"}
+          />
+          <Button
+            text={"Obrisi"}
+            handleClick={() => deletePlaner()}
+            width={"w-full"}
+          />
         </div>
       </div>
     </div>

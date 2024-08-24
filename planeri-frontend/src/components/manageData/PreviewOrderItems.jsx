@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useOrdersService } from "../../service/useOrdersService";
 import { useProductsService } from "../../service/useProductsService";
+import Button from "../reusable/Button";
 
 export default function PreviewOrderItems({ order, setShowOrderItems }) {
   const [ordersItems, setOrdersItems] = useState([]);
@@ -103,12 +104,11 @@ export default function PreviewOrderItems({ order, setShowOrderItems }) {
             ))}
           </div>
         </div>
-        <div
-          onClick={() => setShowOrderItems(false)}
-          className="flex w-full h-10 justify-center items-center bg-green-600 rounded-lg font-bold text-lg"
-        >
-          Nazad
-        </div>
+        <Button
+          text={"Nazad"}
+          handleClick={() => setShowOrderItems(false)}
+          width={"w-full"}
+        />
       </div>
     </div>
   );

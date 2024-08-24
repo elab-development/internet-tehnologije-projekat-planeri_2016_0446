@@ -1,4 +1,5 @@
 import { dates } from "../../data/stepsData";
+import Button from "../reusable/Button";
 
 export default function Step3({
   step,
@@ -31,7 +32,7 @@ export default function Step3({
                   type="radio"
                   name="planerLayout"
                   value="StudentLayout1"
-                  onChange={(e) => handlePlanerLayoutChange(e)}
+                  onChange={(e) => handlePlanerLayoutChange(e.target.value)}
                   checked={selectedPlanerLayout === "StudentLayout1"}
                 />
                 <p>Layout 1</p>
@@ -44,7 +45,7 @@ export default function Step3({
                   type="radio"
                   name="planerLayout"
                   value="StudentLayout2"
-                  onChange={(e) => handlePlanerLayoutChange(e)}
+                  onChange={(e) => handlePlanerLayoutChange(e.target.value)}
                   checked={selectedPlanerLayout === "StudentLayout2"}
                 />
                 <p>Layout 2</p>
@@ -57,7 +58,7 @@ export default function Step3({
                   type="radio"
                   name="planerLayout"
                   value="StudentLayout3"
-                  onChange={(e) => handlePlanerLayoutChange(e)}
+                  onChange={(e) => handlePlanerLayoutChange(e.target.value)}
                   checked={selectedPlanerLayout === "StudentLayout3"}
                 />
                 <p>Layout 3</p>
@@ -190,18 +191,16 @@ export default function Step3({
         <div className="flex flex-col w-2/3 h-[300px] border border-green-950"></div>
       </div>
       <div className="flex flex-row w-full h-fit justify-between items-center">
-        <div
-          onClick={() => prevStep(step)}
-          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
-        >
-          Previous step
-        </div>
-        <div
-          onClick={() => nextStep(step)}
-          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
-        >
-          Next step
-        </div>
+        <Button
+          text={"Prethodni korak"}
+          handleClick={() => prevStep(step)}
+          width={"w-1/5"}
+        />
+        <Button
+          text={"Sledeci korak"}
+          handleClick={() => nextStep(step)}
+          width={"w-1/5"}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 export default function Home({ cartItems, setCartItems }) {
+  const navigate = useNavigate();
   const getCartItems = () => {
     var cItems = JSON.parse(localStorage.getItem("cart") || "[]");
     const totalPrice = cItems.reduce(
@@ -55,7 +57,7 @@ export default function Home({ cartItems, setCartItems }) {
           <p>2 NACINA DA GA PRILAGODITE SEBI</p>
         </div>
         <div className="flex flex-row w-full justify-center gap-x-20 mb-5">
-          <div className="flex flex-col w-full h-[350px] justify-between items-center border border-black gap-y-3 py-2 px-10">
+          <div className="flex flex-col w-full h-[350px] justify-between items-center border rounded-lg border-black gap-y-3 py-2 px-10">
             <p>OPCIJA 1</p>
             <div className="flex flex-col justify-center items-center gap-y-2">
               <p>3 brza koraka</p>
@@ -68,11 +70,14 @@ export default function Home({ cartItems, setCartItems }) {
               <li>izbor velicine</li>
             </ul>
 
-            <div className="flex w-[80%] h-8 justify-center items-center border border-black rounded-lg hover:bg-green-600 cursor-pointer">
+            <div
+              onClick={() => navigate("/planers")}
+              className="flex w-[80%] h-8 justify-center items-center border border-black rounded-lg hover:bg-orange-400 cursor-pointer"
+            >
               <p>BRZA KUPOVINA</p>
             </div>
           </div>
-          <div className="flex flex-col w-full h-[350px] justify-between items-center border border-black gap-y-3 py-2 px-10">
+          <div className="flex flex-col w-full h-[350px] justify-between items-center border rounded-lg border-black gap-y-3 py-2 px-10">
             <p>OPCIJA 2</p>
             <div className="flex flex-col justify-center items-center gap-y-2">
               <p>Potpuno prilagodjavanje</p>
@@ -85,7 +90,10 @@ export default function Home({ cartItems, setCartItems }) {
               <li>beleske</li>
             </ul>
 
-            <div className="flex w-[80%] h-8 justify-center items-center border border-black rounded-lg hover:bg-green-600 cursor-pointer">
+            <div
+              onClick={() => navigate("/personalize")}
+              className="flex w-[80%] h-8 justify-center items-center border border-black rounded-lg hover:bg-orange-400 cursor-pointer"
+            >
               <p>PERSONALIZUJ SVE</p>
             </div>
           </div>

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useProductsService } from "../service/useProductsService";
 import { useOrdersService } from "../service/useOrdersService";
 import { useAuthService } from "../service/useAuthService";
+import Button from "../components/reusable/Button";
+import CartItem from "../components/reusable/CartItem";
 
 export default function Header({
   setShowLoginPopup,
@@ -181,29 +183,10 @@ export default function Header({
 
                   <div className="flex flex-col w-full h-full gap-y-2 overflow-y-auto">
                     {cartItems?.map((cItem) => (
-                      <div className="flex flex-row w-full h-fit gap-x-5 justify-between items-center border border-gray-800 p-1">
-                        <div className="flex w-10 h-10 justify-center items-center border border-gray-800">
-                          <p>
-                            {cItem?.planerType
-                              ? cItem?.planerType?.name[0]
-                              : cItem?.name[0]}
-                          </p>
-                        </div>
-                        <div className="flex flex-col">
-                          <p>
-                            {cItem?.planerType
-                              ? cItem.planerType.name
-                              : cItem.name}
-                          </p>
-                          <p>Price: {cItem.price}</p>
-                        </div>
-                        <div
-                          onClick={() => removeCartItem(cItem.id)}
-                          className="flex flex-col w-10 h-10 items-center justify-center text-lg hover:bg-orange-400 hover:rounded-xl cursor-pointer"
-                        >
-                          <FaTrash />
-                        </div>
-                      </div>
+                      <CartItem
+                        cartItem={cItem}
+                        removeCartItem={removeCartItem}
+                      />
                     ))}
                   </div>
 
@@ -212,12 +195,11 @@ export default function Header({
                       <p>Cena: </p>
                       <p>{price} din</p>
                     </div>
-                    <div
-                      onClick={() => createOrder()}
-                      className="flex w-full h-fit p-3 justify-center items-center cursor-pointer bg-orange-400"
-                    >
-                      Kupi
-                    </div>
+                    <Button
+                      text={"Kupi"}
+                      handleClick={() => createOrder()}
+                      width={"w-full"}
+                    />
                   </div>
                 </div>
               )}

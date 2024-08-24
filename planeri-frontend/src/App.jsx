@@ -13,27 +13,49 @@ import MyOrders from "./parts/MyOrders";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [showRegisterPopup, setShowRegisterPopup] = useState(false);
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
   const handleLogin = async () => {
     try {
-      // Make a GET request using Axios
       const response = await axios.post("http://127.0.0.1:8000/api/login", {
         email: email,
         password: password,
       });
-      localStorage.setItem("userInfo", JSON.stringify(response.data.user));
-      localStorage.setItem("userToken", response.data.access_token);
-      setUser(response.data.user);
-      setShowLoginPopup(false);
-      // Set the fetched data to the state
-      alert(response.data.message);
+      if (response.status === 200) {
+        localStorage.setItem("userInfo", JSON.stringify(response.data.user));
+        localStorage.setItem("userToken", response.data.access_token);
+        setUser(response.data.user);
+        setShowLoginPopup(false);
+        setEmail(null);
+        setName(null);
+        setPassword(null);
+        alert(response.data.message);
+      }
     } catch (error) {
-      // Handle errors
+      console.log(error);
+    }
+  };
+
+  const handleRegister = async () => {
+    try {
+      setShowLoginPopup(false);
+      const response = await axios.post("http://127.0.0.1:8000/api/register", {
+        name: name,
+        email: email,
+        password: password,
+      });
+      if (response.status === 200) {
+        setShowRegisterPopup(false);
+        alert(response.data.message);
+        handleLogin();
+      }
+    } catch (error) {
       console.log(error);
     }
   };
@@ -88,8 +110,8 @@ function App() {
                 >
                   X
                 </p>
-                <p>Welcome</p>
-                <p>Login to the app</p>
+                <p>Dobrodosli</p>
+                <p>Prijavite se</p>
                 <div className="flex flex-col gap-y-5 border border-blue-300 p-6 rounded-2xl">
                   <div className="flex flex-col w-full justify-center items-center">
                     <p>Email</p>
@@ -101,7 +123,7 @@ function App() {
                     />
                   </div>
                   <div className="flex flex-col w-full justify-center items-center">
-                    <p>Password</p>
+                    <p>Lozinka</p>
                     <input
                       className="border border-blue-400"
                       value={password}
@@ -113,7 +135,65 @@ function App() {
                     onClick={() => handleLogin()}
                     className="flex flex-col w-full h-fit px-6 py-1 rounded-lg justify-center items-center bg-orange-400 text-white cursor-pointer"
                   >
-                    <p>Login</p>
+                    <p>Prijavi se</p>
+                  </div>
+                </div>
+                <p
+                  onClick={() => setShowRegisterPopup(true)}
+                  className="cursor-pointer hover:underline"
+                >
+                  Registruj se
+                </p>
+              </div>
+            </div>
+          </>
+        )}
+        {showRegisterPopup && (
+          <>
+            <div className="absolute flex flex-col w-full h-full justify-center items-center bg-slate-700 opacity-50"></div>
+            <div className="absolute flex flex-col h-full w-full justify-center items-center">
+              <div className="relative flex flex-col w-[400px] h-[400px] justify-center items-center bg-white rounded-lg p-6 gap-y-4">
+                <p
+                  onClick={() => setShowRegisterPopup(false)}
+                  className="absolute right-4 top-4 text-black cursor-pointer"
+                >
+                  X
+                </p>
+                <p>Dobrodosli</p>
+                <p>Registrujte se</p>
+                <div className="flex flex-col gap-y-5 border border-blue-300 p-6 rounded-2xl">
+                  <div className="flex flex-col w-full justify-center items-center">
+                    <p>Ime</p>
+                    <input
+                      className="border border-blue-400"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      type="text"
+                    />
+                  </div>
+                  <div className="flex flex-col w-full justify-center items-center">
+                    <p>Email</p>
+                    <input
+                      className="border border-blue-400"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="text"
+                    />
+                  </div>
+                  <div className="flex flex-col w-full justify-center items-center">
+                    <p>Lozinka</p>
+                    <input
+                      className="border border-blue-400"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      type="password"
+                    />
+                  </div>
+                  <div
+                    onClick={() => handleRegister()}
+                    className="flex flex-col w-full h-fit px-6 py-1 rounded-lg justify-center items-center bg-orange-400 text-white cursor-pointer"
+                  >
+                    <p>Registruj se</p>
                   </div>
                 </div>
               </div>

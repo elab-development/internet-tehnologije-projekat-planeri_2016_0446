@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Button from "../reusable/Button";
 
 export default function Step1({
   step,
@@ -96,12 +97,11 @@ export default function Step1({
         <div className="flex flex-col w-2/3 h-[300px] border border-green-950"></div>
       </div>
       <div className="flex flex-col w-full h-fit justify-center items-end">
-        <div
-          onClick={() => nextStep(step)}
-          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
-        >
-          Next step
-        </div>
+        <Button
+          text={"Sledeci korak"}
+          handleClick={() => nextStep(step)}
+          width={"w-1/5"}
+        />
       </div>
     </div>
   );

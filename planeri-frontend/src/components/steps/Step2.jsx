@@ -3,6 +3,7 @@ import { coverDesigns, covers } from "../../data/stepsData";
 import layout1 from "../steps/images/layout1.jpg";
 import layout2 from "../steps/images/layout2.png";
 import layout3 from "../steps/images/layout3.jpeg";
+import Button from "../reusable/Button";
 export default function Step2({
   step,
   nextStep,
@@ -116,18 +117,16 @@ export default function Step2({
         </div>
       </div>
       <div className="flex flex-row w-full h-fit justify-between items-center">
-        <div
-          onClick={() => prevStep(step)}
-          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
-        >
-          Previous step
-        </div>
-        <div
-          onClick={() => nextStep(step)}
-          className="flex w-[20%] h-10 justify-center items-center bg-orange-400 rounded-lg text-white"
-        >
-          Next step
-        </div>
+        <Button
+          text={"Prethodni korak"}
+          handleClick={() => prevStep(step)}
+          width={"w-1/5"}
+        />
+        <Button
+          text={"Sledeci korak"}
+          handleClick={() => nextStep(step)}
+          width={"w-1/5"}
+        />
       </div>
     </div>
   );
