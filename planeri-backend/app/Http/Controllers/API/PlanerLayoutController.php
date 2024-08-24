@@ -17,8 +17,6 @@ class PlanerLayoutController extends Controller
         return $planerLayouts;
     }
 
-
-
     /**
      * Store a newly created resource in storage.
      */
@@ -29,6 +27,7 @@ class PlanerLayoutController extends Controller
         try {
             $planerLayout = PlanerLayout::create([
                 'name' => $json['name'],
+                'image' => $json['image'],
                 'price' => $json['price'],
                 'planer_type_id' => $json['planer_type_id']
             ]);

@@ -38,4 +38,15 @@ class PlanerController extends Controller
             return response()->json(['error' => 'Failed to create planer. Error: ' . $e->getMessage()], 500);
         }
     }
+
+    public function deletePlaner(string $id)
+    {
+        try {
+            Planer::where('id', '=', $id)->delete();
+
+            return response()->json(["planerMessage" => "Planer is deleted."]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete planer. Error: ' . $e->getMessage()], 500);
+        }
+    }
 }

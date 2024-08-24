@@ -3,7 +3,6 @@ import axios from "axios";
 export const useProductsService = () => {
   const getProductsRequest = async () => {
     try {
-      // Make a GET request using Axios
       const response = await axios.get("http://127.0.0.1:8000/api/products");
       return response.data;
     } catch (error) {
@@ -14,7 +13,6 @@ export const useProductsService = () => {
 
   const getProductsByIdsRequest = async (productsIds) => {
     try {
-      // Make a GET request using Axios
       const response = await axios.post(
         "http://127.0.0.1:8000/api/productsByIds",
         productsIds
@@ -28,7 +26,6 @@ export const useProductsService = () => {
 
   const getProductsBySearchRequest = async (search) => {
     try {
-      // Make a GET request using Axios
       const response = await axios.get(
         `http://127.0.0.1:8000/api/products/search=${search}`
       );

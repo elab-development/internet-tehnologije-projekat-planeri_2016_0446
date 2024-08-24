@@ -46,6 +46,7 @@ Route::get('/roles', [UserController::class, 'getRoles']);
 
 Route::get('/planers', [PlanerController::class, 'getPlaners']);
 Route::post('/planers', [PlanerController::class, 'createPlaner']);
+Route::delete('/planers/{id}', [PlanerController::class, 'deletePlaner']);
 Route::resource('planerTypes', PlanerTypeController::class);
 Route::resource('planerLayouts', PlanerLayoutController::class);
 Route::get('/products', [ProductController::class, 'getProducts']);
