@@ -6,6 +6,7 @@ import { useOrdersService } from "../service/useOrdersService";
 import { useAuthService } from "../service/useAuthService";
 import Button from "../components/reusable/Button";
 import CartItem from "../components/reusable/CartItem";
+import HeaderMenu from "../components/HeaderMenu";
 
 export default function Header({
   setShowLoginPopup,
@@ -207,65 +208,11 @@ export default function Header({
           </div>
         </div>
       </div>
-      <div className="flex flex-row w-full h-8 bg-[#FFECA1] justify-center items-center gap-x-40 text-black">
-        <p
-          className={`cursor-pointer hover:bg-orange-400 ${
-            selectedMenuItem === "Planeri" && "bg-orange-400"
-          } p-1 rounded-lg`}
-          onClick={() => {
-            setSelectedMenuItem("Planers");
-            navigate("/planers");
-          }}
-        >
-          Planeri
-        </p>
-        <p
-          className={`cursor-pointer hover:bg-orange-400 ${
-            selectedMenuItem === "Personalize" && "bg-orange-400"
-          } p-1 rounded-lg`}
-          onClick={() => {
-            setSelectedMenuItem("Personalize");
-            navigate("/personalize");
-          }}
-        >
-          Personalizuj
-        </p>
-        <p
-          className={`cursor-pointer hover:bg-orange-400 ${
-            selectedMenuItem === "About" && "bg-orange-400"
-          } p-1 rounded-lg`}
-          onClick={() => {
-            setSelectedMenuItem("About");
-            navigate("/aboutPlanners");
-          }}
-        >
-          O planerima
-        </p>
-        {user?.role_id === 1 && (
-          <p
-            className={`cursor-pointer hover:bg-orange-400 ${
-              selectedMenuItem === "Manage" && "bg-orange-400"
-            } p-1 rounded-lg`}
-            onClick={() => {
-              setSelectedMenuItem("Manage");
-              navigate("/manage");
-            }}
-          >
-            Upravljanje podacima
-          </p>
-        )}
-        <p
-          className={`cursor-pointer hover:bg-orange-400 ${
-            selectedMenuItem === "Contact" && "bg-orange-400"
-          } p-1 rounded-lg`}
-          onClick={() => {
-            setSelectedMenuItem("Contact");
-            navigate("/contact");
-          }}
-        >
-          Kontakt
-        </p>
-      </div>
+      <HeaderMenu
+        selectedMenuItem={selectedMenuItem}
+        setSelectedMenuItem={setSelectedMenuItem}
+        isAdmin={user?.role_id === 1}
+      />
     </div>
   );
 }
