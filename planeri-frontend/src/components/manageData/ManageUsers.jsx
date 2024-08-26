@@ -4,6 +4,7 @@ import { useAuthService } from "../../service/useAuthService";
 import TextField from "../reusable/TextField";
 import SelectField from "../reusable/SelectField";
 import Button from "../reusable/Button";
+import { toast } from "react-toastify";
 
 export default function ManageUsers() {
   const [editUser, setEditUser] = useState(null);
@@ -28,6 +29,16 @@ export default function ManageUsers() {
   };
 
   const createUser = async () => {
+    if (
+      editUser === null ||
+      editUser?.name === "" ||
+      editUser?.email === "" ||
+      editUser?.password === ""
+    ) {
+      toast("Popunite sva polja!");
+      return;
+    }
+
     await registerRequest({
       name: editUser.name,
       email: editUser.email,
@@ -39,6 +50,10 @@ export default function ManageUsers() {
   };
 
   const updateUser = async () => {
+    if (editUser === null || editUser?.name === "" || editUser?.email === "") {
+      toast("Popunite sva polja!");
+      return;
+    }
     await updateUserRequest(
       {
         name: editUser.name,

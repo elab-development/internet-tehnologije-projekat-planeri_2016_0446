@@ -25,6 +25,14 @@ export default function ManageOrders() {
   };
 
   const updateOrder = async () => {
+    if (
+      editOrder === null ||
+      editOrder.price === "" ||
+      editOrder.status === ""
+    ) {
+      toast("Popunite sva polja!");
+      return;
+    }
     await updateOrderRequest(
       {
         price: editOrder.price,

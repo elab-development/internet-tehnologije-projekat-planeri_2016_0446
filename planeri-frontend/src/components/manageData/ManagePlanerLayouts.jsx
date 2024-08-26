@@ -4,6 +4,7 @@ import { usePlanerTypesService } from "../../service/usePlanerTypesService";
 import TextField from "../reusable/TextField";
 import SelectField from "../reusable/SelectField";
 import Button from "../reusable/Button";
+import { toast } from "react-toastify";
 
 export default function ManagePlanerLayouts() {
   const [editPlanerLayout, setEditPlanerLayout] = useState(null);
@@ -28,6 +29,14 @@ export default function ManagePlanerLayouts() {
   };
 
   const createPlanerLayout = async () => {
+    if (
+      editPlanerLayout === null ||
+      editPlanerLayout.name === "" ||
+      editPlanerLayout.price === ""
+    ) {
+      toast("Popunite sva polja!");
+      return;
+    }
     await createPlanerLayoutRequest({
       name: editPlanerLayout?.name,
       image: editPlanerLayout?.name,
@@ -44,6 +53,15 @@ export default function ManagePlanerLayouts() {
   };
 
   const updatePlanerLayout = async () => {
+    if (
+      editPlanerLayout === null ||
+      editPlanerLayout.name === "" ||
+      editPlanerLayout.price === ""
+    ) {
+      toast("Popunite sva polja!");
+      return;
+    }
+
     await updatePlanerLayoutRequest(
       {
         name: editPlanerLayout.name,

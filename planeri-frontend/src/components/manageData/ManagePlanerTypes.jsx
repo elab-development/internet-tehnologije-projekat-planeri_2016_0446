@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { usePlanerTypesService } from "../../service/usePlanerTypesService";
 import TextField from "../reusable/TextField";
 import Button from "../reusable/Button";
+import { toast } from "react-toastify";
 
 export default function ManagePlanerTypes() {
   const [editPlanerType, setEditPlanerType] = useState(null);
@@ -19,6 +20,15 @@ export default function ManagePlanerTypes() {
   };
 
   const createPlanerType = async () => {
+    if (
+      editPlanerType === null ||
+      editPlanerType?.name === "" ||
+      editPlanerType?.price === ""
+    ) {
+      toast("Popunite sva polja!");
+      return;
+    }
+
     await createPlanerTypeRequest({
       name: editPlanerType.name,
       price: editPlanerType.price,
@@ -33,6 +43,15 @@ export default function ManagePlanerTypes() {
   };
 
   const updatePlanerType = async () => {
+    if (
+      editPlanerType === null ||
+      editPlanerType?.name === "" ||
+      editPlanerType?.price === ""
+    ) {
+      toast("Popunite sva polja!");
+      return;
+    }
+
     await updatePlanerTypeRequest(
       {
         name: editPlanerType.name,
