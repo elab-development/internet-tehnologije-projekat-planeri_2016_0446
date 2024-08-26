@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
 
         Product::create([
             'id' => 99900,
-            'name' => "Product 1",
+            'name' => "Studentski veci",
             'size' => "A4",
             'price' => "1000",
             'image' => "/relative/path"
@@ -25,7 +25,7 @@ class ProductSeeder extends Seeder
 
         Product::create([
             'id' => 99901,
-            'name' => "Product 2",
+            'name' => "Studentski manji",
             'size' => "A5",
             'price' => "1200",
             'image' => "/relative/path"
@@ -33,7 +33,7 @@ class ProductSeeder extends Seeder
 
         Product::create([
             'id' => 99902,
-            'name' => "Product 3",
+            'name' => "Dnevni veci",
             'size' => "A4",
             'price' => "900",
             'image' => "/relative/path"
@@ -42,7 +42,7 @@ class ProductSeeder extends Seeder
 
         Product::create([
             'id' => 99903,
-            'name' => "Product 4",
+            'name' => "Dnevni manji",
             'size' => "A5",
             'price' => "2100",
             'image' => "/relative/path"

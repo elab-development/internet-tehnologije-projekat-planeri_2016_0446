@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { dates } from "../../data/stepsData";
 import Button from "../reusable/Button";
+import layout1 from "../../images/layout1Step3.jpeg";
+import layout2 from "../../images/layout2Step3.png";
+import layout3 from "../../images/layout3Step3.png";
 
 export default function Step3({
   step,
@@ -17,6 +21,8 @@ export default function Step3({
   selectedDailyPlanerType,
   handleDailyPlanerTypeChange,
 }) {
+  const [img, setImg] = useState(null);
+
   return (
     <div className="flex flex-col w-full h-full justify-center items-center p-10 gap-y-5">
       <div className="flex flex-row w-full h-full justify-center items-start">
@@ -25,40 +31,58 @@ export default function Step3({
             <div className="flex flex-col w-full h-full justify-start items-start">
               <p className="text-2xl font-semibold">Izaberite raspored</p>
               <div
-                onClick={(e) => handlePlanerLayoutChange("StudentLayout1")}
+                onClick={(e) => {
+                  setImg(layout1);
+                  handlePlanerLayoutChange("StudentLayout1");
+                }}
                 className="flex text-xl gap-x-5"
               >
                 <input
                   type="radio"
                   name="planerLayout"
                   value="StudentLayout1"
-                  onChange={(e) => handlePlanerLayoutChange(e.target.value)}
+                  onChange={(e) => {
+                    setImg(layout1);
+                    handlePlanerLayoutChange(e.target.value);
+                  }}
                   checked={selectedPlanerLayout === "StudentLayout1"}
                 />
                 <p>Layout 1</p>
               </div>
               <div
-                onClick={(e) => handlePlanerLayoutChange("StudentLayout2")}
+                onClick={(e) => {
+                  setImg(layout2);
+                  handlePlanerLayoutChange("StudentLayout2");
+                }}
                 className="flex text-xl gap-x-5"
               >
                 <input
                   type="radio"
                   name="planerLayout"
                   value="StudentLayout2"
-                  onChange={(e) => handlePlanerLayoutChange(e.target.value)}
+                  onChange={(e) => {
+                    setImg(layout2);
+                    handlePlanerLayoutChange(e.target.value);
+                  }}
                   checked={selectedPlanerLayout === "StudentLayout2"}
                 />
                 <p>Layout 2</p>
               </div>
               <div
-                onClick={(e) => handlePlanerLayoutChange("StudentLayout3")}
+                onClick={(e) => {
+                  setImg(layout3);
+                  handlePlanerLayoutChange("StudentLayout3");
+                }}
                 className="flex text-xl gap-x-5"
               >
                 <input
                   type="radio"
                   name="planerLayout"
                   value="StudentLayout3"
-                  onChange={(e) => handlePlanerLayoutChange(e.target.value)}
+                  onChange={(e) => {
+                    setImg(layout3);
+                    handlePlanerLayoutChange(e.target.value);
+                  }}
                   checked={selectedPlanerLayout === "StudentLayout3"}
                 />
                 <p>Layout 3</p>
@@ -188,7 +212,9 @@ export default function Step3({
             </div>
           )}
         </div>
-        <div className="flex flex-col w-2/3 h-[300px] border border-green-950"></div>
+        <div className="flex flex-col w-2/3 h-[300px]">
+          <img className="w-full h-full" src={img} alt="" />
+        </div>
       </div>
       <div className="flex flex-row w-full h-fit justify-between items-center">
         <Button

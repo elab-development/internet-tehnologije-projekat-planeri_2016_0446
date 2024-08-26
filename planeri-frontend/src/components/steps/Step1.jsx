@@ -1,5 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Button from "../reusable/Button";
+import studentPlaner from "../../images/studentPlaner.png";
+import dailyPlaner from "../../images/dailyPlaner.png";
+import bulletPlaner from "../../images/bulletPlaner.png";
 
 export default function Step1({
   step,
@@ -12,6 +15,24 @@ export default function Step1({
   selectedPageNumber,
   handlePageNumberChange,
 }) {
+  const [img, setImg] = useState(null);
+  const showPlanerTypeImage = (id) => {
+    switch (id) {
+      case 1:
+        setImg(dailyPlaner);
+        break;
+      case 2:
+        setImg(studentPlaner);
+        break;
+      case 3:
+        setImg(bulletPlaner);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="flex flex-col w-full h-full justify-center items-center p-10 gap-y-5">
       <div className="flex flex-row w-full h-full justify-center items-start">
@@ -20,7 +41,10 @@ export default function Step1({
             <p className="text-2xl font-semibold">Izaberi vrstu planera</p>
             {planerTypes?.map((pType) => (
               <div
-                onClick={() => handlePlanerTypeChange(pType)}
+                onClick={() => {
+                  showPlanerTypeImage(pType.id);
+                  handlePlanerTypeChange(pType);
+                }}
                 key={pType.id}
                 className="flex text-xl gap-x-5"
               >
@@ -28,7 +52,10 @@ export default function Step1({
                   type="radio"
                   name="planerType"
                   value={pType.name}
-                  onChange={() => handlePlanerTypeChange(pType)}
+                  onChange={() => {
+                    showPlanerTypeImage(pType.id);
+                    handlePlanerTypeChange(pType);
+                  }}
                   checked={selectedPlanerType?.name === pType.name}
                 />
                 <p>{`${pType.name} (${pType.price} din)`}</p>
@@ -94,7 +121,9 @@ export default function Step1({
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-2/3 h-[300px] border border-green-950"></div>
+        <div className="flex flex-col w-2/3 h-[300px]">
+          <img className="w-full h-full" src={img} alt="" />
+        </div>
       </div>
       <div className="flex flex-col w-full h-fit justify-center items-end">
         <Button
