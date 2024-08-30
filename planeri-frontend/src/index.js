@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -5,18 +6,21 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { APIProvider } from "@vis.gl/react-google-maps";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <App />
-    <ToastContainer
-      position="top-center"
-      autoClose={2000}
-      hideProgressBar={true}
-      newestOnTop={false}
-      closeOnClick
-    />
+    <APIProvider apiKey={"AIzaSyDjxlukZNQm6Cj6I75zr9N9dC5okbg30_0"}>
+      <App />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+      />
+    </APIProvider>
   </BrowserRouter>
 );
 
